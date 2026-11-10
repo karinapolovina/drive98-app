@@ -1,13 +1,11 @@
 # NEED FOR DRIVE98
 
-Игра для начинающих водителей. Запуск: https://t.me/needfordrive98_bot (кнопка меню игры).
+Telegram miniapp: https://t.me/needfordrive98_bot
 
-Интерфейс размещён на GitHub Pages. Вход — проверенная Ed25519-подпись Telegram Mini Apps. Пароли, телефон и токен бота не используются. Персональные данные и прогресс хранятся в серверной базе D1; GitHub содержит только клиентскую сборку и открытые учебные материалы.
+Telegram signatures are verified by the Supabase backend. Career progress, garage and rewards are stored per user. The leaderboard includes opted-in profiles and server-awarded points. Demo progress is not imported.
 
-Карьера, гараж, маршруты и результаты синхронизируются с сервером. Общий рейтинг доступен по желанию: в нём видны ник и REP недели, без Telegram ID и личных маршрутов. Недельный лимит — 80 REP. Поездки отмечаются самостоятельно, приложение не подтверждает фактическое вождение. Старый демопрогресс в соревновательные баллы не переносится.
+GitHub Pages hosts the client. No backend secret keys are included. Routing uses OpenStreetMap and OSRM; users must confirm recalculated routes. Do not interact with the app while driving.
 
-Сборка — один index.html с изображениями и Leaflet. Для работы необходим интернет. Подготовка маршрутов использует OpenStreetMap, Nominatim и OSRM. Полная ссылка Яндекс Карт переносит точки, путь пересчитывается OSRM и требует проверки человеком. Короткие ссылки не поддерживаются.
+800 questions from PDD-2026. Individual questions have not been independently verified against current official tickets.
 
-В наборе 800 учебных вопросов категории AB из PDD-2026. Актуальность каждого вопроса относительно официальных билетов отдельно не подтверждена. Источники и лицензии: pdd-source.json, PDD-LICENSE.txt, LEAFLET-LICENSE.txt, ROAD-SIGN-SOURCE.txt.
-
-Все задания и разборы выполняются вне движения. Скорость и километры не дают бонусов. Покупки не влияют на рейтинг.
+Sources and licenses: pdd-source.json, PDD-LICENSE.txt, LEAFLET-LICENSE.txt, ROAD-SIGN-SOURCE.txt.
