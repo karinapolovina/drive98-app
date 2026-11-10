@@ -89,3 +89,44 @@ input,textarea,select,p,label,summary{font-style:normal;line-height:1.55}
 .home-scene .game-title>small,.home-scene .game-title .line{display:none!important}
 .home-scene .game-title h1{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important}
 .home-scene .game-title::after{content:"";display:block;width:100%;aspect-ratio:3.9;background:url("drive98-underground-logo.png") center/100% auto no-repeat}
+
+.app.road-stories-screen:has(.road-picker,.road-question){padding-top:74px!important;background:#090f17!important}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories{position:relative;isolation:isolate;max-width:620px;margin-inline:auto;color:#e5edf6}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories::before{content:"";position:absolute;inset:-30px -15px auto;height:390px;z-index:-1;pointer-events:none;background:linear-gradient(180deg,#07101a44,#090f17 96%),url("drive98-career-night.png") center 42%/cover}
+.road-stories-screen:has(.road-picker,.road-question) .screen-code{color:#9fe3ff!important;font-size:10px;letter-spacing:.18em;margin-bottom:8px}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories>h1{width:fit-content;max-width:100%;padding-right:.1em;margin:6px 0 9px;font-size:clamp(36px,11vw,60px)!important;line-height:1.05;font-style:italic!important;letter-spacing:-.025em;color:#e9f5ff!important;background:linear-gradient(#fff 13%,#dbecf9 49%,#829db5 52%,#eaf8ff 75%);background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 #294964)}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories p{margin:4px 0 10px;line-height:1.35;font-size:13px}
+.road-stories-screen:has(.road-picker,.road-question) .road-stat{color:#a6e7ff;padding:9px 0;border-top:2px solid #6ed9ff;margin-top:13px;background:linear-gradient(90deg,#125e882e,transparent)}
+.road-stories-screen:has(.road-picker,.road-question) .road-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:6px 0 12px}
+.road-stories-screen:has(.road-picker,.road-question) .road-tabs button{padding:8px 1px!important;font-size:12px!important;background:#0b1927!important;color:#c0d3e5!important;border:1px solid #30485c!important}
+.road-stories-screen:has(.road-picker,.road-question) .road-tabs button.on{background:#135783!important;color:white!important;border-color:#8fddff!important}
+.road-stories-screen:has(.road-picker,.road-question) .road-picker{counter-reset:stage;display:grid;gap:8px}
+.road-stories-screen:has(.road-picker,.road-question) .road-card{position:relative;counter-increment:stage;padding:10px 12px 10px 53px;margin:0!important;min-height:84px;border:1px solid #5c98bf;border-left:3px solid #8be1ff;background:linear-gradient(111deg,#13466c,#0d1c2d 77%);box-shadow:inset 0 1px 0 #ffffff22}
+.road-stories-screen:has(.road-picker,.road-question) .road-card::before{content:counter(stage,decimal-leading-zero);position:absolute;left:10px;top:12px;color:#a6eaff;font:italic 700 25px/1 'D98 Display',sans-serif}
+.road-stories-screen:has(.road-picker,.road-question) .road-card small{color:#a3ddfc;font-size:9px;letter-spacing:.13em}
+.road-stories-screen:has(.road-picker,.road-question) .road-card h2{font-style:italic!important;font-size:24px;margin:1px 0 3px;line-height:1.08}
+.road-stories-screen:has(.road-picker,.road-question) .road-card p{font-size:12px;margin:3px 0 5px}
+.road-stories-screen:has(.road-picker,.road-question) .road-card .primary,.road-stories-screen:has(.road-picker,.road-question) .road-card .secondary{padding:5px 10px!important;min-height:29px;margin:2px 0 0!important;width:auto!important;font-size:13px!important;background:#123f63!important;border:1px solid #6eb6de!important;color:#e7f7ff!important}
+.road-stories-screen:has(.road-picker,.road-question) .road-card.road-locked{background:#0c1621;border-color:#334559;opacity:.74}
+.road-stories-screen:has(.road-picker,.road-question) .road-card.road-locked button{display:none}
+.road-stories-screen:has(.road-picker,.road-question) .road-card.road-locked>p:not(.road-unlock){display:none}
+.road-stories-screen:has(.road-picker,.road-question) .road-unlock{color:#b3c1d0}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories:has(>.road-question){display:flex;flex-direction:column}
+.road-stories-screen:has(.road-picker,.road-question) .trip-back{align-self:flex-start;margin-bottom:9px;padding:5px 10px;border:1px solid #5285a5;color:#b9e8ff;background:#0c1c2a}
+.road-stories-screen:has(.road-picker,.road-question) .road-progress{height:3px;margin:0 0 5px;background:#284c65}
+.road-stories-screen:has(.road-picker,.road-question) .road-progress i{display:block;height:100%;min-width:10%;background:#7bd9ff}
+.road-stories-screen:has(.road-picker,.road-question) .story-scene{margin:4px 0 8px;padding:2px;border:1px solid #7ab7d9;background:#0a1c2c}
+.road-stories-screen:has(.road-picker,.road-question) .story-scene img{display:block;width:100%;height:auto;max-height:240px;object-fit:contain}
+.road-stories-screen:has(.road-picker,.road-question) .scene-footer{display:flex;min-height:23px;align-items:center;background:#123856;padding:4px 8px;color:#c4edff;font-size:10px}
+.road-stories-screen:has(.road-picker,.road-question) .road-question{margin:4px 0 8px;font-size:17px!important;line-height:1.3!important}
+.road-stories-screen:has(.road-picker,.road-question) .race-answers{display:grid;gap:7px;margin:0}
+.road-stories-screen:has(.road-picker,.road-question) .race-answers button{counter-increment:choice;display:flex;align-items:center;gap:10px;min-height:42px;text-align:left;padding:6px 10px!important;border:1px solid #638dad!important;border-left:3px solid #7ad2ff!important;background:linear-gradient(110deg,#17476a,#102132)!important;color:#fff!important}
+.road-stories-screen:has(.road-picker,.road-question) .race-answers{counter-reset:choice}
+.road-stories-screen:has(.road-picker,.road-question) .race-answers button::before{content:counter(choice,decimal-leading-zero);color:#a9e8ff;font:italic 700 16px 'D98 Display',sans-serif}
+.road-stories-screen:has(.road-picker,.road-question) .road-original{order:5;margin:4px 0 0;padding:4px 0;border:0;color:#b7d8ed}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories .hud-caption{color:#aac2d5;margin-top:8px}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories:has(>.road-question)>h1{font-size:clamp(29px,8.3vw,43px)!important;line-height:1.03}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories:has(>.road-picker) .road-card{padding-top:7px;padding-bottom:7px}
+.road-stories-screen:has(.road-picker,.road-question) .road-stories:has(>.road-picker) .road-card h2{font-size:21px}
+.app.road-stories-screen:has(.road-picker,.road-question) .logo{background:url("drive98-underground-logo.png") left center/contain no-repeat;width:144px;height:42px;font-size:0!important;color:transparent!important}
+.app.road-stories-screen:has(.road-picker,.road-question) .logo *{visibility:hidden}
