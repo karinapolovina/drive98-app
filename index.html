@@ -897,7 +897,7 @@ const pointsBeforeYandex=plannerRenderPoints;plannerRenderPoints=function(){poin
 const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYandex();if(!routePlanner)return;let search=document.querySelector('.planner-search');if(search&&!document.getElementById('yandex-import-slot'))search.insertAdjacentHTML('beforebegin',`<button class="secondary import-open" onclick="openYandexImport()" ${plannerIsLocked()?'disabled':''}>Импорт из Яндекс Карт ↗</button><div id="yandex-import-slot"></div>`)};ringPreparation=function(){openRoutePlanner()};
 </script></html>
 <link rel="stylesheet" href="d98-road-game.css?v=20261111"><script src="d98-road-data.js?v=20261111-player3"></script><script src="d98-road-engine.js?v=20261111"></script>
-<link rel="stylesheet" href="d98-ui.css?v=20261111-career">
+<link rel="stylesheet" href="d98-ui.css?v=20261111-wasted">
 <script type="text/plain" id="d98-road-code">window.D98_ROAD_CLOUD={
  read(){return cloud.state.roadStories||{version:1,completed:{},run:null};},
  call(event,data){return cloudAction(event,data,()=>{});}
@@ -961,10 +961,20 @@ const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYa
   return `<div class="screen-code">TRIP COMPLETE / ${run.log.length} ИЗ ${current.task_ids.length}</div><h1>Маршрут<br>пройден.</h1><h2>${escape(current.title)}</h2><p>${escape(current.finish)}</p><div class="road-correct">Все ситуации поездки разобраны. Маршрут завершён.</div><div class="brief-grid"><div>НАГРАДА<strong>+${earned} REP / CR</strong></div><div>ГАРАЖ<strong>${wallet} CR</strong></div></div>${earned?'':'<p>Повторное прохождение или недельный лимит: новая награда не начислена.</p>'}${next.length?`<div class="road-card"><b>Открылись истории</b>${next.map(r=>`<p>${escape(r.title)}</p>`).join('')}</div>`:''}${action('К выбору поездки','list')}${action('Пройти заново','restart','',true)}`;
  }
  function failure(task,scene){
-  const choice=task.options.find(o=>o.number===run.selected),f=choice.failure;
-  // CSS variables consumed from an external stylesheet otherwise rebase relative URLs.
-  const imageURL=new URL(f.image,document.baseURI).href;
-  return `<section class="shopping-failure road-failure" style="--failure-image:url('${escape(imageURL)}')"><div class="failure-cover"></div><div class="failure-panel"><div class="failure-code">ПОЕЗДКА ПРЕРВАНА · СЦЕНА ${run.index+1}/${current.task_ids.length}</div><h1>WASTED</h1><h2>${escape(f.caption)}</h2><p>${escape(scene.title)}</p><div class="road-choice"><b>Твой ответ</b><p>${escape(choice.text)}</p></div><div class="failure-explain"><h2>Разбор ошибки</h2>${explanation(task)}<details><summary>Посмотреть исходную схему</summary><img class="road-scene" src="${escape(task.original)}" alt="Исходная схема задачи"></details></div><p class="road-image-note">${escape(f.illustration)}</p><p class="failure-reward">Попытка завершена без награды. Ранее заработанные REP, CR, детали гаража и завершённые истории сохранены.</p>${action('Начать поездку заново →','restart')}${action('К выбору поездки','list','',true)}</div></section>`;
+  const selected=task.options.find(o=>o.number===run.selected);
+  const correct=task.options.find(o=>o.number===task.correct);
+  const f=selected.failure;
+  return `<section class="d98-outcome is-wasted">
+  <button class="trip-back" data-road-action="list">‹ Карьера</button>
+  <div class="outcome-meta"><span>${escape(current.title)}</span><span>${run.index+1} ИЗ ${current.task_ids.length}</span></div>
+  <h1>WASTED</h1>
+  <p class="outcome-deck">Поездка прервана</p>
+  <figure><img src="${escape(f.image)}" alt="${escape(f.illustration)}"><div class="camera-label" aria-hidden="true"><span><i></i> REC</span><span>ДОРОЖНАЯ КАМЕРА</span></div><figcaption>${escape(f.caption)}</figcaption></figure>
+  <div class="outcome-result"><small>Твой ответ</small><strong>${escape(selected.text)}</strong></div>
+  <section class="outcome-explain"><h2>Как нужно было поступить</h2><p><b>${escape(correct.text)}</b></p>${task.explanation?`<p>${escape(task.explanation)}</p>`:''}</section>
+  ${action('Начать поездку заново →','restart')}
+  <details><summary>Исходная схема и разбор «За рулём»</summary><img class="road-scene" src="${escape(task.original)}" alt="Исходная схема задачи"><a href="${escape(task.source)}?page=2" target="_blank" rel="noopener">Разбор «За рулём» ↗</a></details>
+  </section>`;
  }
  function question(){
   const task=tasks[current.task_ids[run.index]],scene=current.scenes[run.index];
@@ -1010,13 +1020,13 @@ const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYa
   if(type==='restart')return start(current.id);
   if(type==='answer'){
    if(!['question','practice'].includes(run.status))return;
-   if(remote){const result=await remote.call('road.answer',{attemptId:run.attemptId,index:run.index,answer:Number(value)});if(!result)return;run=result.state.roadStories.run;}
+   if(remote){const activeRun=run;const result=await remote.call('road.answer',{attemptId:run.attemptId,index:run.index,answer:Number(value)});if(!result||run!==activeRun||state.tab!=='roadstories')return;run=result.state.roadStories.run;}
    else run=engine.answer(run,current,tasks[current.task_ids[run.index]],Number(value));
-   render();window.scrollTo(0,0);return;
+   if(run.status!=='feedback'){render();window.scrollTo(0,0);return;}
   }
-  if(type==='next'){
+  if(type==='answer'||type==='next'){
    if(run.status!=='feedback')return;
-   if(remote){const result=await remote.call('road.next',{attemptId:run.attemptId,index:run.index});if(!result)return;run=result.state.roadStories.run;earned=result.reward||0;progress=remote.read();}
+   if(remote){const activeRun=run;const result=await remote.call('road.next',{attemptId:run.attemptId,index:run.index});if(!result||run!==activeRun||state.tab!=='roadstories')return;run=result.state.roadStories.run;earned=result.reward||0;progress=remote.read();}
    else{run=engine.advance(run,current);if(run.status==='complete')finish();}
    render();window.scrollTo(0,0);
   }

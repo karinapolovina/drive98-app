@@ -130,3 +130,61 @@ input,textarea,select,p,label,summary{font-style:normal;line-height:1.55}
 .road-stories-screen:has(.road-picker,.road-question) .road-stories:has(>.road-picker) .road-card h2{font-size:21px}
 .app.road-stories-screen:has(.road-picker,.road-question) .logo{background:url("drive98-underground-logo.png") left center/contain no-repeat;width:144px;height:42px;font-size:0!important;color:transparent!important}
 .app.road-stories-screen:has(.road-picker,.road-question) .logo *{visibility:hidden}
+
+.app.road-stories-screen:has(.d98-outcome) .logo{background:url("drive98-underground-logo.png") left center/contain no-repeat;width:144px;height:42px;font-size:0!important;color:transparent!important}
+.app.road-stories-screen:has(.d98-outcome) .logo *{visibility:hidden}
+.road-stories .d98-outcome{--signal:#8be3ff;--panel:#123350;color:#e7eff7}
+.road-stories .d98-outcome.is-wasted{--signal:#ff9298;--panel:#321923}
+.d98-outcome .trip-back{display:block;margin-bottom:8px}
+.d98-outcome .outcome-meta{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:2px solid var(--signal);color:var(--signal);font-size:10px;letter-spacing:.11em;text-transform:uppercase}
+.road-stories .d98-outcome h1{width:fit-content;padding-right:.09em;margin:7px 0 5px;font-size:clamp(52px,15vw,82px)!important;font-style:italic!important;line-height:1;letter-spacing:-.02em;color:#fff;background:linear-gradient(#fff 15%,#ebf5fe 46%,#95b6cc 49%,#e8f7ff 84%);background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 3px 0 #29455b)}
+.road-stories .d98-outcome.is-wasted h1{background-image:linear-gradient(#fff1ed 9%,#ffc2bd 44%,#d35b68 51%,#ffd1c8 85%);filter:drop-shadow(0 3px 0 #501d2b)}
+.d98-outcome .outcome-deck{font-size:12px;font-weight:700;color:var(--signal);margin:3px 0 10px;letter-spacing:.11em;text-transform:uppercase}
+.d98-outcome figure{position:relative;margin:0 0 10px;border:1px solid var(--signal);background:#0b1724;overflow:hidden}
+.d98-outcome figure img{display:block;width:100%;height:auto;max-height:210px;object-fit:contain}
+.d98-outcome figure figcaption{padding:6px 8px;background:var(--panel);color:#e7f2fc;font-size:10px;letter-spacing:.10em;text-transform:uppercase}
+.d98-outcome .outcome-result,.d98-outcome .outcome-explain{background:linear-gradient(110deg,var(--panel),#101d2a);border:1px solid #4b6377;border-left:3px solid var(--signal);padding:8px 10px;margin:0 0 8px}
+.d98-outcome .outcome-result small,.d98-outcome .outcome-explain h2{display:block;color:var(--signal);font:700 12px/1.3 'D98 Text',sans-serif;letter-spacing:.12em;text-transform:uppercase;margin:0 0 4px}
+.d98-outcome .outcome-result strong{display:block;font-size:16px}
+.road-stories .d98-outcome .outcome-explain p{font-size:13px;line-height:1.42;margin:2px 0 5px}
+.d98-outcome details{margin:8px 0;color:#abd3e9;font-size:12px}
+.d98-outcome details a{color:#abd3e9}
+.road-stories .d98-outcome button.primary{margin:5px 0 4px!important;min-height:40px;border:1px solid var(--signal)!important;background:linear-gradient(100deg,var(--panel),#163450)!important;color:#f6faff!important}
+.road-stories .d98-outcome button.secondary{margin:2px 0!important;padding:6px!important;font-size:14px}
+.d98-outcome figure img{max-height:176px}
+.road-stories .d98-outcome button.primary{padding:8px 9px!important;font-size:20px!important}
+.app.road-stories-screen:has(.d98-outcome){padding-top:68px!important}
+.road-stories .d98-outcome{--signal:#c9ff57;--panel:#111c16;position:relative;isolation:isolate;display:flex;flex-direction:column}
+.road-stories .d98-outcome.is-wasted{--signal:#ffae71;--panel:#211713}
+.d98-outcome .trip-back{align-self:flex-start;color:#eef6df;background:#111912;border-color:#536345}
+.d98-outcome .outcome-meta{order:0;padding:5px 0;border:0;color:#dbe6d4}
+.d98-outcome figure{order:1;position:relative;height:250px;margin:0 -16px -82px;border:0;background:#101916;z-index:-1}
+.d98-outcome figure img{width:100%;height:100%;max-height:none;object-fit:contain;background:#0b1211}
+.d98-outcome figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0b121100 54%,#0b1211aa 77%,#0b1211 100%);pointer-events:none}
+.d98-outcome figure figcaption{position:absolute;top:9px;left:12px;padding:3px 7px;background:#080e0cba;color:#f2f5ed;font-size:9px;max-width:94%}
+.road-stories .d98-outcome h1,.road-stories .d98-outcome.is-wasted h1{order:2;margin:0 0 5px -4px;padding:0 15px 4px;font-size:clamp(45px,14vw,70px)!important;color:#eff9e9;background:linear-gradient(110deg,#101912eb,#182618aa 80%,transparent);border-left:4px solid var(--signal);-webkit-text-fill-color:initial;transform:skewX(-7deg);filter:drop-shadow(3px 3px #080c08);text-shadow:2px 2px #293f28}
+.d98-outcome .outcome-deck{order:3;margin:0 0 10px;padding:0 3px;color:var(--signal);text-shadow:1px 1px #000}
+.d98-outcome .outcome-result,.d98-outcome .outcome-explain{order:4;border:0;border-top:1px solid #74836b80;margin:0;padding:8px 3px;background:linear-gradient(90deg,var(--panel),#101717)}
+.d98-outcome .outcome-result{display:grid;grid-template-columns:40% 60%;align-items:baseline;gap:0}
+.d98-outcome .outcome-result strong{font-size:14px}
+.d98-outcome .outcome-result small,.d98-outcome .outcome-explain h2{font-size:10px;letter-spacing:.08em}
+.road-stories .d98-outcome .outcome-explain p{color:#d9e1d5}
+.road-stories .d98-outcome button.primary{order:5;text-align:left;margin:8px 0 2px!important;padding:8px 15px!important;background:linear-gradient(100deg,var(--signal),#e0efc2)!important;border:0!important;color:#14200d!important;text-shadow:none!important;clip-path:polygon(0 0,100% 0,96% 100%,0 100%)}
+.d98-outcome details{order:6;margin-top:6px;color:#b3c1b1}
+
+.app.road-stories-screen:has(.is-wasted){background:#0d1013!important}
+.road-stories .d98-outcome.is-wasted{--signal:#c6d4df;--panel:#151b21;color:#eef0ed}
+.d98-outcome.is-wasted .trip-back{color:#e1e8ec;background:#171d23;border-color:#51606b}
+.d98-outcome.is-wasted .outcome-meta{color:#c8d2da;margin-bottom:6px}
+.d98-outcome.is-wasted figure{height:270px;margin:0 -12px 10px;border:3px solid #21272b;border-radius:8px;background:#131718;box-shadow:0 0 0 1px #677278;z-index:0}
+.d98-outcome.is-wasted figure img{width:100%;height:100%;object-fit:cover;filter:saturate(.55) sepia(.1) contrast(1.07)}
+.d98-outcome.is-wasted figure::before{content:"";position:absolute;inset:8px;border:1px solid #e2e8e7a6;box-shadow:0 0 3px #d4dbd7a3;z-index:2;pointer-events:none}
+.d98-outcome.is-wasted figure::after{background:repeating-linear-gradient(0deg,#0a0e141f 0 1px,transparent 1px 3px),radial-gradient(ellipse at center,transparent 37%,#050a0b8a 100%)}
+.camera-label{position:absolute;z-index:3;top:15px;left:16px;right:16px;display:flex;justify-content:space-between;color:#f7f9f5;text-shadow:0 0 4px #000;font:700 11px/1.2 monospace}
+.camera-label i{display:inline-block;width:7px;height:7px;background:#ec4949;border-radius:50%;box-shadow:0 0 8px #ff5f5f;margin-right:4px}
+.d98-outcome.is-wasted figure figcaption{inset:auto 8px 12px;padding:5px 8px;background:#233d65df;color:white;z-index:3;font:700 10px/1.25 'D98 Text',sans-serif;letter-spacing:.12em}
+.road-stories .d98-outcome.is-wasted h1{padding:0;margin:0;font-size:38px!important;transform:none;background:none;border:0;color:#f0eeeb;text-shadow:1px 1px #000;filter:none}
+.d98-outcome.is-wasted .outcome-deck{color:#ffb2ae;margin:4px 0 10px;padding:0}
+.d98-outcome.is-wasted .outcome-result,.d98-outcome.is-wasted .outcome-explain{background:#151d25;border-color:#53616b;padding:7px 8px}
+.road-stories .d98-outcome.is-wasted .outcome-explain p{color:#e0e6eb}
+.road-stories .d98-outcome.is-wasted button.primary{background:linear-gradient(100deg,#d9c899,#b7a36b)!important;color:#1d1b14!important}
