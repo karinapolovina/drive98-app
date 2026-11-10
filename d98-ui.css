@@ -83,3 +83,9 @@ input,textarea,select,p,label,summary{font-style:normal;line-height:1.55}
 .road-stories .failure-panel h1{font-family:'D98 Display',sans-serif!important;font-weight:700;font-style:oblique 10deg}
 @media(min-width:800px){.home-scene{padding:95px 8% 28px;display:grid;grid-template-columns:minmax(300px,560px) minmax(150px,1fr);grid-template-rows:auto 1fr auto;gap:24px}.home-scene .game-title{grid-column:1;grid-row:1}.home-scene .player-rep{grid-column:2;grid-row:1;justify-self:end;align-self:center}.home-scene .console-menu{grid-column:1;grid-row:2;align-self:end}.home-scene .console-footer{grid-column:1/-1;grid-row:3}.home-scene .game-title h1{font-size:88px!important}}
 @media(max-height:700px) and (max-width:799px){.home-scene{padding-top:72px;gap:12px}.home-scene .game-title h1{font-size:48px!important}.home-scene .player-rep strong{font-size:32px}.home-scene .console-item{padding-top:7px!important;padding-bottom:7px!important;font-size:23px!important}.home-utility{margin-top:10px}}
+
+
+.home-scene .game-title{transform:none!important;width:min(100%,420px)!important;position:relative!important}
+.home-scene .game-title>small,.home-scene .game-title .line{display:none!important}
+.home-scene .game-title h1{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important}
+.home-scene .game-title::after{content:"";display:block;width:100%;aspect-ratio:3.9;background:url("drive98-underground-logo.png") center/100% auto no-repeat}

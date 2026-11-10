@@ -897,7 +897,7 @@ const pointsBeforeYandex=plannerRenderPoints;plannerRenderPoints=function(){poin
 const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYandex();if(!routePlanner)return;let search=document.querySelector('.planner-search');if(search&&!document.getElementById('yandex-import-slot'))search.insertAdjacentHTML('beforebegin',`<button class="secondary import-open" onclick="openYandexImport()" ${plannerIsLocked()?'disabled':''}>Импорт из Яндекс Карт ↗</button><div id="yandex-import-slot"></div>`)};ringPreparation=function(){openRoutePlanner()};
 </script></html>
 <link rel="stylesheet" href="d98-road-game.css?v=20261111"><script src="d98-road-data.js?v=20261111-player3"></script><script src="d98-road-engine.js?v=20261111"></script>
-<link rel="stylesheet" href="d98-ui.css?v=20261111-2">
+<link rel="stylesheet" href="d98-ui.css?v=20261111-underground">
 <script type="text/plain" id="d98-road-code">window.D98_ROAD_CLOUD={
  read(){return cloud.state.roadStories||{version:1,completed:{},run:null};},
  call(event,data){return cloudAction(event,data,()=>{});}
