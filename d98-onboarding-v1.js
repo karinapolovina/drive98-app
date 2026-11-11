@@ -57,7 +57,7 @@ function install(){
   catch(e){error.textContent='Не удалось сохранить профиль. Попробуй ещё раз.'}
   finally{saving=false;if(dialog){dialog.querySelectorAll('button,input').forEach(el=>el.disabled=false);const button=dialog.querySelector('[data-tour-next]');if(index===0&&button)button.textContent='Сохранить и продолжить'}}
  }
- function start(resume=false){if(active||saving)return;previousFocus=document.activeElement;oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';active=true;index=resume&&Number.isInteger(saved.step)?Math.max(0,Math.min(saved.step,steps.length-1)):0;draft=null;const app=document.querySelector('.app');if(app)app.inert=true;navigate();draw()}
+ function start(resume=false){if(active||saving)return;previousFocus=document.activeElement;oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';active=true;index=resume&&Number.isInteger(saved.step)?Math.max(0,Math.min(saved.step,steps.length-1)):0;draft=null;persist(false);const app=document.querySelector('.app');if(app)app.inert=true;navigate();draw()}
  window.d98StartTutorial=()=>start(false);
  document.addEventListener('keydown',e=>{
   if(!active||!dialog)return;
