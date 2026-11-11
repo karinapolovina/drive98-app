@@ -1,0 +1,94 @@
+/* Readability and touch layout, including narrow phones. Loaded after legacy styles. */
+*,*::before,*::after{box-sizing:border-box}
+body{overflow-x:hidden;-webkit-text-size-adjust:100%}
+button,input,select,textarea{font-family:inherit}
+button{min-height:44px;line-height:1.25}
+button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #a8e5f6;outline-offset:3px}
+button:disabled{cursor:default}
+.app{width:100%;min-width:0}
+.app:not(.home-mode) header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.app:not(.home-mode) header .pill{max-width:56%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.screen-head h1,.game-screen .screen-head h1{font-size:clamp(34px,10.5vw,48px);line-height:1.02;overflow-wrap:break-word;margin:14px 0 12px}
+.screen-head p,.game-screen .screen-head p{font-size:14px;line-height:1.6;color:#a8becb;max-width:100%}
+.screen-code{overflow-wrap:anywhere;letter-spacing:1.5px!important;font-size:10px!important;line-height:1.6!important}
+.game-screen h2{line-height:1.12;overflow-wrap:break-word}
+.game-screen p,.sheet p{overflow-wrap:break-word}
+.primary,.secondary{max-width:100%;min-width:0;white-space:normal;overflow-wrap:break-word;text-wrap:pretty}
+.primary{font-size:20px;line-height:1.25;padding:14px 16px}
+.secondary{font-size:17px;line-height:1.3;padding:12px 14px}
+.game-tabs,.garage-mode-tabs{gap:5px}
+.game-tabs button,.garage-mode-tabs button{min-width:0;min-height:44px;line-height:1.2;padding:10px 6px;font-size:17px;white-space:normal}
+.parts-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.parts-grid .part{display:flex;flex-direction:column;align-items:center;padding:12px 5px}
+.parts-grid .part b{font-size:14px;line-height:1.25;min-height:2.5em;display:flex;align-items:center;justify-content:center;margin:8px 0;overflow-wrap:anywhere}
+.parts-grid .part small{font-size:9px;line-height:1.4;margin-top:auto;letter-spacing:0}
+.garage-build{gap:8px;flex-wrap:wrap;font-size:11px}
+.garage-progression{padding:12px 15px!important;margin:12px 0 18px!important}
+.garage-progression summary{min-height:44px;align-content:center;font-size:14px!important;line-height:1.5}
+.garage-progression details>p{font-size:14px;line-height:1.65}
+.garage-goal p{font-size:14px!important}
+.purchase-panel{gap:12px;min-width:0}
+.purchase-panel>div{min-width:0}
+.purchase-panel h2{font-size:clamp(24px,7vw,32px);overflow-wrap:anywhere}
+.purchase-panel strong{flex-shrink:0}
+.practice-story-link{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;margin:0 0 16px;border-bottom:1px solid #355064}
+.practice-story-link span{font-size:12px;line-height:1.5;color:#a9bdcb;flex:1}
+.practice-story-link button{font-size:16px;width:auto;max-width:60%;margin:0}
+.mission-meter{padding-top:12px!important;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px}
+.mission-meter>span{font-size:10px!important;line-height:1.6;letter-spacing:.4px}
+.mission-meter>b{position:static!important;font-size:32px!important;white-space:nowrap}
+.mission-meter>div{grid-column:1/-1;margin-top:0!important}
+.leaderboard,.leader,.driver-name{min-width:0}
+.driver-name b{overflow-wrap:anywhere;line-height:1.25}
+.rank-note,.garage-economy,.hud-caption,.planner-note{font-size:12px!important;line-height:1.65!important;color:#98b2c4!important;letter-spacing:.3px!important}
+.social-note,.social-budget{font-size:12px!important;line-height:1.65!important}
+.social-counts{flex-wrap:wrap;gap:12px 22px!important}
+.social-earn-title{margin-top:30px!important}
+.road-question{font-size:clamp(17px,4.8vw,21px)!important;line-height:1.5!important;text-transform:none!important;font-style:normal!important}
+.road-attempt-budget{font-size:13px;line-height:1.6;color:#a4c2d4}
+.road-stories .race-answers button{font-size:15px;line-height:1.5;min-height:52px}
+.road-stories .race-answers button span{min-width:0}
+.outcome-explain p,.road-explanation p,.road-practice p{font-size:14px!important;line-height:1.7!important;color:#c3d8e5}
+.outcome-deck{font-size:13px!important;line-height:1.5!important;letter-spacing:.8px!important}
+.sheet{max-height:calc(100dvh - 20px);overflow-y:auto;overscroll-behavior:contain;min-width:0}
+.sheet h1{font-size:clamp(32px,9vw,44px);line-height:1.05;margin-right:38px;overflow-wrap:break-word}
+.sheet .close{min-width:40px;min-height:40px;line-height:1;margin:0}
+.sheet label{font-size:14px;line-height:1.6}
+.sheet label:has(input:not([type=checkbox]):not([type=radio]):not([type=range])),.sheet label:has(select),.sheet label:has(textarea){display:block;margin:16px 0}
+.sheet input:not([type=checkbox]):not([type=radio]):not([type=range]),.sheet select,.sheet textarea{display:block;width:100%;max-width:100%;min-width:0;min-height:46px;padding:12px 14px;margin-top:7px;background:#0a1a26;color:#e6f2f9;border:1px solid #56798d;border-radius:6px;font:16px/1.4 Manrope,Arial,sans-serif;color-scheme:dark}
+.sheet textarea{min-height:100px;resize:vertical}
+.sheet input[type=checkbox],.sheet input[type=radio]{width:20px;height:20px;accent-color:#83d7ee;flex-shrink:0;margin:0}
+.sheet label:has(input[type=checkbox]),.sheet label:has(input[type=radio]){display:flex;align-items:center;gap:10px;min-height:44px;margin:14px 0}
+.sheet summary{min-height:44px;align-content:center;font-size:14px;line-height:1.5;cursor:pointer}
+.sheet .primary,.sheet .secondary{width:100%}
+.sheet .social-invite input{font-size:14px}
+.route-guide-detail summary{min-height:44px;align-content:center}
+.poster .player-poster-stats small{font-size:10px!important;line-height:1.4;letter-spacing:.4px}
+.poster .player-poster-stats span{min-width:0}
+.d98-start-visible{width:100%;margin:0 0 16px}
+@media(max-width:359px){
+ .app,.game-screen{padding-left:16px!important;padding-right:16px!important}
+ .screen-head h1,.game-screen .screen-head h1{font-size:36px}
+ .parts-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .game-tabs button,.garage-mode-tabs button{font-size:15px;padding:10px 4px}
+ .sheet{padding:20px 16px!important}
+ .sheet h1{font-size:34px}
+ .practice-story-link{align-items:flex-start;flex-direction:column;gap:8px}
+ .practice-story-link button{max-width:100%;width:100%}
+ .mission-meter>b{font-size:27px!important}
+ .social-counts{gap:12px!important}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}.scanlines{animation:none!important}}
+.game-screen .game-tabs button,.game-screen .garage-mode-tabs button{font-size:17px;line-height:1.25;min-height:44px}
+@media(max-width:359px){.screen-garage .parts-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.game-screen .game-tabs button,.game-screen .garage-mode-tabs button{font-size:15px}}
+.game-screen .chapter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.chapter-option{min-width:0;overflow-wrap:anywhere}
+.mission-select{min-width:0;max-width:100%;gap:10px}
+.mission-text{min-width:0;flex:1}
+.mission-text b{overflow-wrap:anywhere;line-height:1.2}
+.mission-text em{white-space:normal;line-height:1.6}
+.mission-num,.mission-rep{flex-shrink:0}
+.brief-panel p,.road-card p,.card p,.mission-preview p,.ring-form p{font-size:14px;line-height:1.65}
+@media(max-width:359px){.mission-select{padding:12px 10px}.mission-num{font-size:30px}.mission-text b{font-size:20px}.mission-rep{font-size:22px}}
+.home-utility button{font-size:11px!important;line-height:1.5;min-height:44px;color:#c1d7e7;padding:10px 6px}
+@media(max-height:700px){.home-scene{height:780px!important;min-height:780px!important}}
