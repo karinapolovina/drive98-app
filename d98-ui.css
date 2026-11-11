@@ -188,3 +188,34 @@ input,textarea,select,p,label,summary{font-style:normal;line-height:1.55}
 .d98-outcome.is-wasted .outcome-result,.d98-outcome.is-wasted .outcome-explain{background:#151d25;border-color:#53616b;padding:7px 8px}
 .road-stories .d98-outcome.is-wasted .outcome-explain p{color:#e0e6eb}
 .road-stories .d98-outcome.is-wasted button.primary{background:linear-gradient(100deg,#d9c899,#b7a36b)!important;color:#1d1b14!important}
+
+.app.screen-mode:has(.drag-hud){padding-top:74px!important;background:#091018!important}
+.app:has(.drag-hud) .logo{background:url("drive98-underground-logo.png") left center/contain no-repeat;width:144px;height:42px;font-size:0!important;color:transparent!important}
+.app:has(.drag-hud) .logo *{visibility:hidden}
+.app:has(.drag-hud) .screen-head{margin-bottom:9px}
+.app:has(.drag-hud) .screen-head h1{width:fit-content;padding-right:.12em;font-size:52px!important;font-style:italic!important;background:linear-gradient(#fff 20%,#dbecfa 46%,#8ba3b9 51%,#eaf5ff 77%);background-clip:text;-webkit-text-fill-color:transparent}
+.app:has(.drag-hud) .screen-head p{margin:3px 0;font-size:13px}
+.app:has(.drag-hud) .drag-hud{padding:5px 9px;border:1px solid #5e8baa;background:#10253c;color:#c8e9ff;font-size:11px}
+.app:has(.drag-hud) #drag-clock{color:#a4eaff;font-size:27px}
+.app:has(.drag-hud) .drag-track{padding:0 9px 7px;background:linear-gradient(100deg,#0f2034,#0c1621);border-color:#446882}
+.app:has(.drag-hud) .track-labels{padding-top:7px;color:#ceeaff;font-size:9px}
+.app:has(.drag-hud) .drag-road{height:126px;margin:7px -9px 7px;background:linear-gradient(0deg,#07111ce8 0%,#07111c40 60%),url("drive98-career-night.png") center 61%/cover;border:0}
+.app:has(.drag-hud) .finish-line{top:auto;bottom:6px;height:19px;right:6%;width:14px}
+.app:has(.drag-hud) .drag-car{top:auto;bottom:1px;width:51px;height:25px}
+.app:has(.drag-hud) .road-marks{top:auto;bottom:9px;background:repeating-linear-gradient(90deg,#8be7ff 0 14px,transparent 14px 23px)}
+.app:has(.drag-hud) .track-progress{color:#b8daef;font-size:10px}
+.app:has(.drag-hud) .brief-panel,.app:has(.drag-hud) .drag-result{margin:10px 0;padding:12px;background:linear-gradient(110deg,#102d49,#0e1a28);border:1px solid #5a88a7;border-left:3px solid #81d9ff}
+.app:has(.drag-hud) .brief-panel h2{margin:2px 0 5px;font-size:24px}
+.app:has(.drag-hud) .brief-panel p{font-size:12px;line-height:1.45;margin:5px 0;color:#d4e3ee}
+.app:has(.drag-hud) .primary{background:linear-gradient(95deg,#92dbff,#d3ecfa)!important;color:#0b2438!important;padding:9px!important;margin:8px 0 0!important}
+.app:has(.drag-hud) .drag-question{margin-top:12px}
+.app:has(.drag-hud) .drag-question h2{font:700 18px/1.25 'D98 Text',sans-serif!important;text-transform:none!important;letter-spacing:0}
+.app:has(.drag-hud) .race-answers{margin:8px 0;gap:6px}
+.app:has(.drag-hud) .race-answers button{min-height:39px;padding:5px 9px!important;border-left:3px solid #80ccef;background:linear-gradient(110deg,#183c60,#112034);color:#eaf4fa;font-size:14px!important}
+.app:has(.drag-hud) .race-answers button.correct{background:#1a3a31}
+.app:has(.drag-hud) .race-answers button.incorrect{background:#48252d}
+.app:has(.drag-question) .screen-head h1{font-size:36px!important;margin:0}
+.app:has(.drag-question) .screen-head p{display:none}
+.app:has(.drag-question) .drag-road{height:66px;background-position:center 58%}
+.app:has(.drag-question) .pdd-figure{margin:8px 0}
+.app:has(.drag-question) .pdd-figure img{max-height:142px}
