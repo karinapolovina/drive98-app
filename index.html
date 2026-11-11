@@ -710,7 +710,7 @@ const previousComplete=complete;complete=function(){let before=state.done;previo
 function rimSvg(i){let n=[5,6,8,10][i],col=parts.rims[i][2];return `<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="47" fill="#05080c" stroke="#1c2630" stroke-width="4"/><circle cx="50" cy="50" r="34" fill="#101922" stroke="${col}" stroke-width="3"/>${Array.from({length:n},(_,j)=>`<path d="M47 47L46 17 54 17 53 47Z" fill="${col}" transform="rotate(${j*360/n} 50 50)"/>`).join('')}<circle cx="50" cy="50" r="9" fill="${col}"/><circle cx="50" cy="50" r="3" fill="#1a2530"/></svg>`}
 function choosePart(i){preview[garageCat]=i;render()}
 function transactPart(){let i=preview[garageCat],key=garageCat+':'+i,cost=parts[garageCat][i][1];if(!owned.includes(key)){if(wallet<cost){toast('Не хватает кредитов. Заверши миссию, чтобы заработать CR.');return}wallet-=cost;owned.push(key)}equipped[garageCat]=i;saveGarage();render();toast('Установлено / '+parts[garageCat][i][0])}
-const beforeGarageRender=render;render=function(){beforeGarageRender();if(state.tab==='home'){let menu=document.querySelector('.console-menu');let b=document.createElement('button');b.className='console-item';b.textContent='Гараж / '+wallet+' CR';b.onclick=()=>{preview={...equipped};go('garage')};menu.insertBefore(b,menu.lastElementChild);return}let nav=document.getElementById('nav');if(!nav.querySelector('[data-garage]')){let b=document.createElement('button');b.dataset.garage='1';b.className=state.tab==='garage'?'active':'';b.innerHTML='<span>⚙</span>Гараж';b.onclick=()=>{preview={...equipped};go('garage')};nav.append(b)}if(state.tab!=='garage')return;document.querySelector('.app').classList.add('game-screen','screen-garage');let i=preview[garageCat],item=parts[garageCat][i],has=owned.includes(garageCat+':'+i),installed=equipped[garageCat]===i;document.getElementById('content').innerHTML=screenHead('05 / CUSTOMIZE','Твой стиль.<br>Твоя машина.','Визуальный тюнинг / только для виртуальной машины')+`<div class="garage-wallet"><span>КОШЕЛЁК / TUNING CREDITS</span><strong>${wallet}<small> CR</small></strong></div><div class="tuning-stage"><img class="base-car" src="${window.D98_SCENE_ASSET}" alt="Твоя машина в ночном городе"><img class="paint-layer" src="${window.D98_SCENE_ASSET}" alt="" style="filter:hue-rotate(${parts.paint[preview.paint][3]}deg) saturate(1.25)"><div class="underlight" style="background:${parts.neon[preview.neon][2]};box-shadow:0 0 24px 11px ${parts.neon[preview.neon][2]}99"></div><div class="wheel front">${rimSvg(preview.rims)}</div><div class="wheel rear">${rimSvg(preview.rims)}</div><div class="stage-hud">BUILD 01 / STREET COUPE <span>PREVIEW</span></div></div><div class="garage-build"><span>${parts.paint[preview.paint][0]}</span><span>${parts.rims[preview.rims][0]}</span><span>${parts.neon[preview.neon][0]}</span></div><div class="game-tabs">${[['paint','Цвет кузова'],['rims','Диски'],['neon','Подсветка']].map(x=>`<button class="${garageCat===x[0]?'on':''}" onclick="garageCat='${x[0]}';render()">${x[1]}</button>`).join('')}</div><div class="parts-grid">${parts[garageCat].map((p,j)=>`<button class="part ${j===i?'selected-part':''}" onclick="choosePart(${j})"><div class="part-sample">${garageCat==='rims'?rimSvg(j):`<i style="background:${p[2]};${garageCat==='neon'?'box-shadow:0 0 18px '+p[2]:''}"></i>`}</div><b>${p[0]}</b><small>${equipped[garageCat]===j?'УСТАНОВЛЕНО':owned.includes(garageCat+':'+j)?'В ГАРАЖЕ':p[1]+' CR'}</small></button>`).join('')}</div><div class="purchase-panel"><div><small>ВЫБРАНО / ${has?'КУПЛЕНО':'ТЮНИНГ'}</small><h2>${item[0]}</h2></div><strong>${has?'✓':item[1]+' CR'}</strong></div><button class="primary" onclick="transactPart()" ${installed?'disabled':''}>${installed?'Установлено':has?'Установить деталь':'Купить и установить · '+item[1]+' CR'}</button><p class="garage-economy">Стартовый демобаланс — 150 CR. Завершённая миссия приносит 25 CR. Покупки сохраняются в этом браузере. REP в рейтинге не расходуется.</p><button class="secondary" onclick="go('tasks')">Заработать кредиты / миссии ▸</button>`};render();
+const beforeGarageRender=render;render=function(){beforeGarageRender();if(state.tab==='home'){let menu=document.querySelector('.console-menu');let b=document.createElement('button');b.className='console-item';b.textContent='Гараж / '+wallet+' CR';b.onclick=()=>{preview={...equipped};go('garage')};menu.insertBefore(b,menu.lastElementChild);return}let nav=document.getElementById('nav');if(!nav.querySelector('[data-garage]')){let b=document.createElement('button');b.dataset.garage='1';b.className=state.tab==='garage'?'active':'';b.innerHTML='<span>⚙</span>Гараж';b.onclick=()=>{preview={...equipped};go('garage')};nav.append(b)}if(state.tab!=='garage')return;document.querySelector('.app').classList.add('game-screen','screen-garage');let i=preview[garageCat],item=parts[garageCat][i],has=owned.includes(garageCat+':'+i),installed=equipped[garageCat]===i;document.getElementById('content').innerHTML=screenHead('DRIVE98 / GARAGE','Гараж','')+`<div class="garage-wallet"><span>КРЕДИТЫ НА ТЮНИНГ</span><strong>${wallet}<small> CR</small></strong></div><div class="tuning-stage" data-rim="${preview.rims}"><img class="base-car" src="underground-garage-scene.png" alt="Твоя машина в мастерской"><img class="paint-layer" src="underground-garage-scene.png" alt="" style="filter:hue-rotate(${parts.paint[preview.paint][3]}deg) saturate(1.25)"><div class="underlight" style="background:${parts.neon[preview.neon][2]};box-shadow:0 0 24px 11px ${parts.neon[preview.neon][2]}99"></div><div class="wheel front">${rimSvg(preview.rims)}</div><div class="wheel rear">${rimSvg(preview.rims)}</div><div class="stage-hud">NISSAN SKYLINE R34 <span>ГАРАЖ</span></div></div><div class="garage-build"><span>${parts.paint[preview.paint][0]}</span><span>${parts.rims[preview.rims][0]}</span><span>${parts.neon[preview.neon][0]}</span></div><div class="game-tabs">${[['paint','Цвет кузова'],['rims','Диски'],['neon','Подсветка']].map(x=>`<button class="${garageCat===x[0]?'on':''}" onclick="garageCat='${x[0]}';render()">${x[1]}</button>`).join('')}</div><div class="parts-grid">${parts[garageCat].map((p,j)=>`<button class="part ${j===i?'selected-part':''}" onclick="choosePart(${j})"><div class="part-sample">${garageCat==='rims'?rimSvg(j):`<i style="background:${p[2]};${garageCat==='neon'?'box-shadow:0 0 18px '+p[2]:''}"></i>`}</div><b>${p[0]}</b><small>${equipped[garageCat]===j?'УСТАНОВЛЕНО':owned.includes(garageCat+':'+j)?'В ГАРАЖЕ':p[1]+' CR'}</small></button>`).join('')}</div><div class="purchase-panel"><div><small>ВЫБРАНО / ${has?'КУПЛЕНО':'ТЮНИНГ'}</small><h2>${item[0]}</h2></div><strong>${has?'✓':item[1]+' CR'}</strong></div><button class="primary" onclick="transactPart()" ${installed?'disabled':''}>${installed?'Установлено':has?'Установить деталь':'Купить и установить · '+item[1]+' CR'}</button><p class="garage-economy">Стартовый демобаланс — 150 CR. Завершённая миссия приносит 25 CR. Покупки сохраняются в этом браузере. REP в рейтинге не расходуется.</p><button class="secondary" onclick="go('tasks')">Заработать кредиты / миссии ▸</button>`};render();
 // Career progression v1: all rewards are earned once; weekly rewards use Moscow time.
 const chapters=[{name:'Свой район',area:'ЖИЛОЙ РАЙОН',reward:'Наклейка FIRST MILES',code:'FIRST MILES',color:'#8ceaff',steps:[['Разведка района','Найди удобный короткий маршрут и место для остановки. Подготовь запасной вариант.','prep'],['Первый круг','Проедь подготовленный знакомый маршрут в комфортных условиях.','drive'],['Своя территория','В другой день повтори знакомый круг. Закрепление важнее усложнения.','drive']]},{name:'Кофе без сопровождения',area:'НЕОНОВЫЙ ЦЕНТР',reward:'Наклейка COFFEE RUN',code:'COFFEE RUN',color:'#efb97a',steps:[['Разведка кофейни','До выезда изучи дорогу, въезд и два варианта парковки у знакомого кафе.','prep'],['Кофейный заезд','Самостоятельно съезди в знакомое кафе. При необходимости выбери запасную парковку.','drive'],['Любимая остановка','В другой день повтори поездку. Отметь, что теперь стало понятнее.','drive']]},{name:'По своим делам',area:'ТОРГОВЫЙ КВАРТАЛ',reward:'Оформление номера CITY DRIVER',code:'CITY DRIVER',color:'#bded7b',steps:[['План поездки','Выбери небольшое бытовое дело, изучи маршрут и удобную парковку.','prep'],['Городской маршрут','Выполни полезную самостоятельную поездку по подготовленному маршруту.','drive'],['Повторить без спешки','В другой день повтори поездку по делу. Можно выбрать более простые условия.','drive']]},{name:'На работу своим ходом',area:'ДЕЛОВОЙ КВАРТАЛ',reward:'Наклейка OWN WAY',code:'OWN WAY',color:'#c3a1ff',steps:[['Разведка маршрута','Изучи дорогу до работы, тренировки или другого регулярного места и парковку.','prep'],['Пробный выезд','Проедь маршрут в спокойное время. При нехватке навыка сначала потренируйся с инструктором.','drive'],['Мой рабочий маршрут','В другой день повтори поездку в подходящее для себя время. Сохрани запасной вариант.','drive']]}];
 const extraSkills=[['Чистый обзор','В припаркованной машине настрой посадку и зеркала. Проверь, что видишь и до чего дотягиваешься.','prep'],['Своя полоса','До выезда изучи нужные полосы на знакомом маршруте. Проедь участок без резкого исправления маршрута.','drive'],['Парковочный план','Подготовь основную и запасную парковку. Во время полезной поездки используй подходящий вариант.','drive'],['Второй заход','В безопасном месте потренируй изученную парковку. Корректируй положение столько раз, сколько нужно. При нехватке навыка — с инструктором.','drive'],['Новый адрес','Выбери новое полезное место, изучи дорогу и парковку, выполни поездку в комфортных условиях.','drive'],['Вернуться в ритм','После перерыва выполни посильную знакомую поездку. Начни с простого маршрута.','drive']];
@@ -897,7 +897,7 @@ const pointsBeforeYandex=plannerRenderPoints;plannerRenderPoints=function(){poin
 const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYandex();if(!routePlanner)return;let search=document.querySelector('.planner-search');if(search&&!document.getElementById('yandex-import-slot'))search.insertAdjacentHTML('beforebegin',`<button class="secondary import-open" onclick="openYandexImport()" ${plannerIsLocked()?'disabled':''}>Импорт из Яндекс Карт ↗</button><div id="yandex-import-slot"></div>`)};ringPreparation=function(){openRoutePlanner()};
 </script></html>
 <link rel="stylesheet" href="d98-road-game.css?v=20261111"><script src="d98-road-data.js?v=20261111-player3"></script><script src="d98-road-engine.js?v=20261111"></script>
-<link rel="stylesheet" href="d98-ui.css?v=20261111-drag10">
+<link rel="stylesheet" href="d98-ui.css?v=20261111-garage">
 <script type="text/plain" id="d98-road-code">window.D98_ROAD_CLOUD={
  read(){return cloud.state.roadStories||{version:1,completed:{},run:null};},
  call(event,data){return cloudAction(event,data,()=>{});}
@@ -919,7 +919,8 @@ const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYa
   }
  }catch{}
  if(remote)progress=remote.read();
- let current=null,run=null,group='route',earned=0;
+ let current=null,run=null,group='route',earned=0,pdfChoice=null;
+ let garageView='tuning';
  const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const done=r=>Object.prototype.hasOwnProperty.call(progress.completed,r.id);
  const unlocked=r=>!r.unlock_after||!!progress.completed[r.unlock_after];
@@ -936,7 +937,7 @@ const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYa
   if(!route||!unlocked(route))return;
   if(remote){const result=await remote.call('road.start',{trip:id,presentationVersion:2});if(!result)return;progress=remote.read();run=result.state.roadStories.run;}
   else run=engine.begin(route);
-  current=route;earned=0;render();window.scrollTo(0,0);
+  current=route;earned=0;pdfChoice=null;render();window.scrollTo(0,0);
  }
  function finish(){
   if(!done(current)){
@@ -956,9 +957,14 @@ const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYa
    return `<section class="road-card ${available?'':'road-locked'}"><small>${complete?'✓ ПРОЙДЕНО':available?'ДОСТУПНО':'ЗАКРЫТО'} · ${r.task_ids.length} ЗАДАЧ</small><h2>${escape(r.title)}</h2><p>${escape(r.id==='r03'?'Такси: от посадки до высадки. Ошибки можно исправить.':r.goal)}</p>${!available?`<p class="road-unlock">Сначала заверши «${escape(titleFor(r.unlock_after))}».</p>`:''}${action(complete?'Пройти ещё раз →':available?'Начать поездку →':'Пока закрыто','start',r.id,false,!available)}</section>`;
   }).join('')}</div><p class="hud-caption">За первое завершение — до 5 REP / CR по общему недельному лимиту. Повтор — тренировка. Решения принимаются только вне движения.</p>${action('‹ Другие сюжетные поездки','legacy','',true)}`;
  }
+ function pdfOffer(){
+  return `<section class="garage-pdf-context"><h2>А как с твоей машиной?</h2><p>Знаешь, когда менять масло, фильтры и другие расходники?</p>
+  <div class="regulation-answers">${['Знаю сроки','Обычно ищу перед заменой','Пока не знаю'].map((label,index)=>`<button class="${pdfChoice===index?'chosen':''}" data-road-action="pdf-choice" data-road-value="${index}">${label}</button>`).join('')}</div>
+  ${pdfChoice!==null?`<p>Чтобы каждый раз не искать сроки, держи регламент под рукой.</p><div class="regulation-pdf"><span>PDF</span><div><b>Регламент ТО</b><p>Интервалы замены расходников в одном файле.</p></div></div><button class="primary" data-garage-pdf>Посмотреть регламент →</button><p class="garage-pdf-note">Описание, стоимость и покупка — в боте DRIVE98.</p>`:''}</section>`;
+ }
  function completed(){
   const next=data.routes.filter(r=>r.unlock_after===current.id);
-  return `<div class="screen-code">TRIP COMPLETE / ${run.log.length} ИЗ ${current.task_ids.length}</div><h1>Маршрут<br>пройден.</h1><h2>${escape(current.title)}</h2><p>${escape(current.finish)}</p><div class="road-correct">Все ситуации поездки разобраны. Маршрут завершён.</div><div class="brief-grid"><div>НАГРАДА<strong>+${earned} REP / CR</strong></div><div>ГАРАЖ<strong>${wallet} CR</strong></div></div>${earned?'':'<p>Повторное прохождение или недельный лимит: новая награда не начислена.</p>'}${next.length?`<div class="road-card"><b>Открылись истории</b>${next.map(r=>`<p>${escape(r.title)}</p>`).join('')}</div>`:''}${action('К выбору поездки','list')}${action('Пройти заново','restart','',true)}`;
+  return `<div class="screen-code">TRIP COMPLETE / ${run.log.length} ИЗ ${current.task_ids.length}</div><h1>Маршрут<br>пройден.</h1><h2>${escape(current.title)}</h2><p>${escape(current.finish)}</p><div class="road-correct">Все ситуации поездки разобраны. Маршрут завершён.</div><div class="brief-grid"><div>НАГРАДА<strong>+${earned} REP / CR</strong></div><div>ГАРАЖ<strong>${wallet} CR</strong></div></div>${earned?'':'<p>Повторное прохождение или недельный лимит: новая награда не начислена.</p>'}${next.length?`<div class="road-card"><b>Открылись истории</b>${next.map(r=>`<p>${escape(r.title)}</p>`).join('')}</div>`:''}${current.type==='garage'?pdfOffer():''}${action('К выбору поездки','list')}${action('Пройти заново','restart','',true)}`;
  }
  function failure(task,scene){
   const selected=task.options.find(o=>o.number===run.selected);
@@ -1002,16 +1008,43 @@ const openBeforeYandex=openRoutePlanner;openRoutePlanner=function(){openBeforeYa
   }else if(state.tab==='drift'&&!selectedDriftTrip){
    content.insertAdjacentHTML('afterbegin',`<section class="road-stories road-entry"><div class="screen-code">НОВЫЕ ДОРОЖНЫЕ ИСТОРИИ</div><h2>От выезда — до прибытия.</h2><p>7 основных поездок, дополнительные ситуации и гараж. 110 заданий с разбором и Wasted.</p>${action('Выбрать новый маршрут →','open')}</section>`);
   }else if(state.tab==='garage'){
-   content.insertAdjacentHTML('beforeend',`<section class="road-stories road-entry"><h2>Проверить машину</h2><p>Освещение, индикаторы, колёса и доработки: 16 задач перед поездкой.</p>${action('Задания гаража →','open','garage')}</section>`);
+   const tabs=document.createElement('div');
+   tabs.className='garage-mode-tabs';
+   tabs.innerHTML=`<button class="${garageView==='tuning'?'on':''}" data-garage-view="tuning">Тюнинг</button><button class="${garageView==='service'?'on':''}" data-garage-view="service">ТО и обслуживание</button>`;
+   content.querySelector('.tuning-stage').before(tabs);
+   const rewards=[...content.querySelectorAll('.career-rewards')];
+   if(rewards.length){
+    const details=document.createElement('details');details.className='garage-awards';
+    details.innerHTML='<summary>Награды карьеры</summary>';
+    rewards.forEach(section=>details.append(section));content.append(details);
+   }
+   const service=document.createElement('section');service.className='garage-service';
+   service.innerHTML=`<h2>Обслуживание авто</h2><p>Разберись, с чем можно ехать, что проверить и когда нужен ремонт.</p>${data.routes.filter(route=>route.type==='garage').map(route=>`<article class="garage-service-route"><h3>${escape(route.title.replace('Гараж: ',''))}</h3><p>${escape(route.goal)}</p><small>${route.task_ids.length} ${route.task_ids.length===4?'задания':'заданий'}${done(route)?' · ПРОЙДЕНО':''}</small>${unlocked(route)?`<button class="secondary" data-garage-trip="${route.id}">${done(route)?'Пройти ещё раз':'Пройти задания'} →</button>`:`<p class="road-unlock">Сначала заверши «${escape(titleFor(route.unlock_after))}».</p>`}</article>`).join('')}<button class="secondary" data-garage-pdf>Регламент ТО · PDF ↗</button>`;
+   content.querySelector('.tuning-stage').after(service);
+   const showService=garageView==='service';
+   document.querySelector('.app').classList.toggle('garage-service-mode',showService);
+   service.hidden=!showService;
+   for(const item of content.children)if(item.matches('.game-tabs,.parts-grid,.purchase-panel,.primary,.garage-build,.garage-economy,.garage-awards')||item.classList.contains('secondary'))item.hidden=showService;
   }else if(state.tab==='tasks'){
    content.insertAdjacentHTML('afterbegin',`<section class="road-stories road-entry"><b>Сначала разберись с дорогой</b><p>Сюжетные поездки с ситуациями, выбором действий и разбором ошибок.</p>${action('Открыть дорожные истории →','open')}</section>`);
   }
  };
  document.addEventListener('click',async event=>{
+  if(event.target.closest('[data-garage-pdf]')){
+   const url='https://t.me/PayDrive98_bot?start=dGFyaWZfNjExMTAx';
+   if(window.Telegram?.WebApp?.openTelegramLink)window.Telegram.WebApp.openTelegramLink(url);
+   else window.open(url,'_blank','noopener');
+   return;
+  }
+  const view=event.target.closest('[data-garage-view]');
+  if(view&&state.tab==='garage'){garageView=view.dataset.garageView;render();return;}
+  const trip=event.target.closest('[data-garage-trip]');
+  if(trip&&state.tab==='garage'){go('roadstories');return start(trip.dataset.garageTrip);}
   const button=event.target.closest('[data-road-action]');if(!button||button.disabled)return;
   const type=button.dataset.roadAction,value=button.dataset.roadValue;
   if(type==='open')return open(value||'route');
   if(state.tab!=='roadstories')return;
+  if(type==='pdf-choice'&&current?.type==='garage'&&run?.status==='complete'){pdfChoice=Number(value);render();return;}
   if(type==='group'){group=value;current=null;run=null;render();return;}
   if(type==='start')return start(value);
   if(type==='list'){current=null;run=null;earned=0;render();window.scrollTo(0,0);return;}

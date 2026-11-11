@@ -219,3 +219,106 @@ input,textarea,select,p,label,summary{font-style:normal;line-height:1.55}
 .app:has(.drag-question) .drag-road{height:66px;background-position:center 58%}
 .app:has(.drag-question) .pdd-figure{margin:8px 0}
 .app:has(.drag-question) .pdd-figure img{max-height:142px}
+
+.app.screen-garage{padding-top:74px!important;background:#091018!important}
+.screen-garage .logo{background:url("drive98-underground-logo.png") left center/contain no-repeat;width:144px;height:42px;font-size:0!important;color:transparent!important}
+.screen-garage .logo *{visibility:hidden}
+.screen-garage .screen-head{margin:0 0 5px}
+.screen-garage .screen-head h1{width:fit-content;padding-right:.1em;margin:3px 0;font-size:46px!important;font-style:italic!important;background:linear-gradient(#fff 20%,#d7ebfa 46%,#8ca5ba 51%,#e8f8ff 78%);background-clip:text;-webkit-text-fill-color:transparent}
+.screen-garage .screen-head p{display:none}
+.screen-garage .garage-wallet{margin:4px 0 10px;padding:6px 0;border-block:1px solid #3c5c77}
+.screen-garage .garage-wallet span{font-size:9px;letter-spacing:.13em}
+.screen-garage .garage-wallet strong{font-size:28px}
+.garage-mode-tabs{display:flex;gap:4px;margin-bottom:8px}
+.garage-mode-tabs button{flex:1;padding:8px 4px;background:#112338;color:#aecbe0;border:1px solid #4f7592;font:italic 700 17px 'D98 Display',sans-serif;text-transform:uppercase}
+.garage-mode-tabs .on{background:#19597d;color:#edfbff;border-color:#88dbff}
+.screen-garage .tuning-stage{height:auto!important;aspect-ratio:16/9;overflow:hidden;border:1px solid #6da4c5;margin:0 -10px;background:#0c1723}
+.screen-garage .tuning-stage .base-car{position:static!important;width:100%!important;height:100%!important;object-fit:cover!important;transform:none!important}
+
+.screen-garage .stage-hud{inset:auto 0 0;font-size:9px;background:#0a1b2bce;padding:6px 9px}
+.screen-garage .garage-build{display:flex;justify-content:space-between;gap:5px;padding:8px 0;margin-bottom:8px;font-size:9px;color:#a6d0e8;border-bottom:1px solid #34536b}
+.screen-garage #content>.game-tabs{display:flex;gap:4px;margin:8px 0}
+.screen-garage .game-tabs button{flex:1;padding:8px 2px;font-size:14px;background:#112538;border:1px solid #547895;color:#bfd9ec}
+.screen-garage .game-tabs button.on{background:#235578;border-color:#8bdcff;color:#fff}
+.screen-garage .parts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin:7px 0}
+.screen-garage .part{padding:7px 2px;min-height:87px;background:#0f2132;border:1px solid #45647d;color:#dcecf8}
+.screen-garage .part.selected-part{border:2px solid #a3e4ff;background:#1a3d5c}
+.screen-garage .part-sample{height:26px}
+.screen-garage .part-sample i{display:block;width:25px;height:25px;transform:skewX(-14deg);border:1px solid #b3d4e7;margin:auto}
+.screen-garage .part b{font-size:12px;display:block;margin:5px 0}
+.screen-garage .part small{font-size:8px}
+.screen-garage .purchase-panel{padding:6px 0;margin:5px 0;min-height:0}
+.screen-garage .purchase-panel h2{font-size:21px;margin:2px 0}
+.screen-garage .purchase-panel strong{font-size:22px}
+.screen-garage .primary{background:linear-gradient(95deg,#8edaff,#d5efff)!important;color:#112a3d!important;padding:9px!important;margin-top:5px!important;min-height:38px;font-size:20px}
+.screen-garage .garage-economy{display:none}
+.screen-garage #content>.secondary{display:none}
+.garage-service{margin-top:12px}
+.garage-service h2{font-size:25px;font-style:italic;margin:8px 0}
+.garage-service p{font-size:13px;line-height:1.4;color:#bfd1df}
+.service-row{display:flex;justify-content:space-between;align-items:center;padding:10px;border:1px solid #42637d;background:linear-gradient(100deg,#173b59,#102034);margin-bottom:6px}
+.service-row b{font-size:15px}.service-row span{color:#9bdfff;font-size:11px}
+
+.screen-garage [hidden]{display:none!important}
+.garage-mode-tabs button{font-size:15px;min-height:37px;padding:7px 3px}
+.screen-garage .screen-head .screen-code{font-size:9px}
+.garage-service-mode .garage-wallet{display:none}
+.garage-service-mode .garage-mode-tabs{margin-top:10px}
+.service-reminders .reminder-back{border:1px solid #5c87a4;color:#c7e5f7;background:#112539;padding:5px 9px;margin-bottom:12px}
+.service-reminders .screen-code{font-size:9px}
+.service-reminders h1{font:italic 700 36px/1.1 'D98 Display',sans-serif!important;margin:5px 0;background:linear-gradient(#fff 20%,#c5daec 47%,#8cacc5 52%,#eaf7ff 80%);background-clip:text;-webkit-text-fill-color:transparent;width:fit-content;padding-right:.1em}
+.service-reminders .reminder-intro{font-size:13px;color:#b6cede;margin:3px 0 12px}
+.reminder-vehicle{display:grid;grid-template-columns:1fr auto;gap:4px;padding:9px 0;margin-bottom:9px;border-block:1px solid #41627b}
+.reminder-vehicle b{font-size:15px}.reminder-vehicle span{font-size:12px;color:#abc9dd;grid-row:2}
+.reminder-vehicle button{grid-column:2;grid-row:1/3;border:1px solid #5f829c;background:#13314c;color:#bfe7ff;font-size:11px;padding:5px 9px}
+.reminder-card{padding:10px;margin:0 0 8px;background:linear-gradient(110deg,#173c5c,#101f2e);border:1px solid #4c718e;border-left:3px solid #85d6ff}
+.reminder-card>div{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.screen-garage .reminder-card h2{font:700 14px/1.25 'D98 Text',sans-serif;margin:0;color:#ebf4fa}
+.reminder-card>div>span{font-size:9px;color:#a0d5f5;white-space:nowrap}
+.reminder-card.soon{border-left-color:#e5cf82}.reminder-card.soon>div>span{color:#ffe9a9}
+.reminder-card p{font-size:14px;font-weight:600;margin:7px 0 3px;color:#e9f6ff}
+.reminder-card small{display:block;font-size:11px;line-height:1.4;color:#a6c6dc;margin-bottom:4px}
+.reminder-card button{border:0;background:none;color:#9fdbff;padding:5px 0 0;font-size:12px;text-align:left}
+.reminder-delivery{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-block:1px solid #314e66;margin-top:10px;font-size:12px}
+.reminder-delivery button{color:#a8edc0;background:#163b32;border:1px solid #5eac8e;font-size:11px;padding:5px 8px}
+.reminder-footnote{font-size:11px;line-height:1.4;color:#9db7ca;margin:8px 0}
+.reminder-promo-scene{margin:9px -10px;border-block:1px solid #4f7796}
+.reminder-promo-scene img{display:block;width:100%;height:150px;object-fit:cover}
+.reminder-offer{font-size:14px;line-height:1.45;color:#c3d7e7;margin:11px 0}
+.notification-example{padding:11px;background:linear-gradient(120deg,#163952,#0e1e2c);border:1px solid #567c98;border-left:3px solid #94ddff}
+.notification-example>small{font-size:9px;letter-spacing:.14em;color:#a5d6f2}
+.notification-message{margin-top:8px;padding:11px;background:#203c51;border-radius:0 12px 12px 12px;color:#edf7ff}
+.notification-message b{font-size:13px}
+.notification-message p{font-size:14px;line-height:1.4;margin:6px 0}
+.notification-message span{font-size:11px;color:#b6cddd}
+.reminder-benefits{display:flex;gap:6px;flex-wrap:wrap;padding:10px 0}
+.reminder-benefits span{font-size:11px;color:#b4d9ef;border-bottom:1px solid #40627b;padding:3px 0}
+.service-reminders .primary{font-size:18px!important}
+.service-row{cursor:pointer}
+.service-finish h2{font:700 19px/1.2 'D98 Text',sans-serif!important;margin:12px 0 5px}
+.service-finish .reminder-promo-scene img{height:120px}
+.regulation-answers{display:grid;gap:5px;margin:9px 0}
+.regulation-answers button{border:1px solid #537997;background:#142d43;color:#e0effa;padding:9px 10px;text-align:left;font:13px 'D98 Text',sans-serif}
+.regulation-answers button.chosen{border-color:#8fdcff;background:#235573}
+.regulation-offer{margin-top:12px;border-top:1px solid #587487;padding-top:8px}
+.regulation-offer>p{font-size:13px;line-height:1.4}
+.regulation-pdf{display:flex;gap:10px;align-items:center;padding:10px;background:linear-gradient(110deg,#173d5b,#12202c);border:1px solid #55778c;margin:9px 0}
+.regulation-pdf>span{font:italic 700 26px 'D98 Display',sans-serif;color:#abdefa;border:1px solid #7098af;padding:9px 5px}
+.regulation-pdf b{font-size:14px}.regulation-pdf p{font-size:12px;line-height:1.3;margin:4px 0;color:#c2d3df}
+.screen-garage .paint-layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:polygon(14% 57%,23% 45%,34% 40%,44% 32%,50% 29%,64% 29%,75% 33%,81% 34%,86% 44%,86% 58%,79% 64%,73% 72%,35% 79%,20% 74%,14% 68%)}
+.screen-garage .tuning-stage .wheel{position:absolute;width:12%;height:24%;bottom:18%;z-index:3}
+.screen-garage .tuning-stage .wheel.front{left:51%;transform:rotate(-7deg)}
+.screen-garage .tuning-stage .wheel.rear{left:77%;bottom:27%;width:9%;height:21%}
+.screen-garage .underlight{left:21%;right:20%;bottom:16%;height:4px;z-index:2}
+.screen-garage .garage-awards{margin:14px 0;padding:10px;border:1px solid #476780}
+.screen-garage .garage-awards summary{color:#b8d9ee;font-size:14px}
+.garage-service-route{padding:11px;background:linear-gradient(110deg,#173b59,#102034);border:1px solid #42637d;margin:8px 0}
+.garage-service-route h3{font:italic 700 24px/1.1 'D98 Display',sans-serif;margin:0 0 5px;color:#e5f4ff}
+.garage-service-route small{font-size:10px;color:#a4c8df}
+.garage-service-route .secondary{padding:7px 10px;margin:8px 0 0;font-size:16px}
+.garage-pdf-context{padding:14px;margin:18px 0;border:1px solid #5c8aa9;border-left:3px solid #9ae0ff;background:linear-gradient(110deg,#173d5b,#101f2d)}
+.road-stories .garage-pdf-context h2{font:700 20px/1.2 'D98 Text',sans-serif!important;letter-spacing:0;text-transform:none}
+.road-stories .garage-pdf-context p{font:14px/1.45 'D98 Text',sans-serif!important}
+.garage-pdf-note{font-size:11px!important;color:#b4cadd}
+
+.screen-garage .tuning-stage[data-rim="0"] .wheel{display:none}
