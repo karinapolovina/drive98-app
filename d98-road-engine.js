@@ -19,7 +19,8 @@ window.D98RoadEngine={begin,answer,advance};
 /* DRIVE98 learning menu; initialized after the page UI scripts. */
 (function(){
  function installLearning(){
-  if(window.D98LearningInstalled||typeof render!=='function')return;
+  if(window.D98LearningInstalled)return;
+  if(typeof render!=='function'){const observer=new MutationObserver(()=>{if(typeof render==='function'){observer.disconnect();installLearning()}});observer.observe(document.documentElement,{childList:true,subtree:true});return;}
   window.D98LearningInstalled=true;
   const previousRender=render;
   window.openDrive98Courses=function(){
@@ -56,7 +57,8 @@ window.D98RoadEngine={begin,answer,advance};
 /* Contextual course offers: UI only, no changes to game rewards or progress. */
 (function(){
 function install(){
- if(window.D98OffersInstalled||typeof render!=='function')return;
+ if(window.D98OffersInstalled)return;
+ if(typeof render!=='function'){const observer=new MutationObserver(()=>{if(typeof render==='function'){observer.disconnect();install()}});observer.observe(document.documentElement,{childList:true,subtree:true});return;}
  window.D98OffersInstalled=true;
  const products={
  parking:{title:'Парковаться увереннее',text:'«Красивая парковка» и материалы по параллельной парковке: выбери обучение для своей задачи.',cta:'Посмотреть обучение по парковке'},
