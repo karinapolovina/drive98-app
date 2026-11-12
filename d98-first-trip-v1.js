@@ -1,6 +1,6 @@
 (function(){'use strict';function install(){if(!window.D98PracticeInstalled||typeof cloud==='undefined'||typeof render!=='function'){setTimeout(install,50);return;}if(window.D98FirstTripInstalled)return;window.D98FirstTripInstalled=true;
 const firstDone=()=>!!cloud.state?.roadStories?.completed?.r01;
-window.d98BeginFirstTrip=function(){window.d98OpenFirstTrip();};
+window.d98BeginFirstTrip=function(){openRoadStories('route');window.d98OpenFirstTrip();};
 const before=render;render=function(){before();const root=document.getElementById('content');if(!root)return;
 if(state.tab==='home'&&!firstDone()){
  const nav=root.querySelector('.home-menu');const card=document.createElement('section');card.className='first-trip-entry';card.innerHTML='<small>НАЧНИ ЗДЕСЬ · БЕЗ ТАЙМЕРА</small><h2>Твоя первая поездка</h2><p>Съезди в магазин у дома: рассмотри ситуации и выбери действия. Ошибку можно разобрать и исправить.</p><button class="primary" data-first-trip>Начать первую поездку →</button><p class="first-trip-reward">За завершение — до 5 REP и 5 CR. CR пригодятся в гараже.</p><details><summary>Что будет дальше?</summary><p>Новые истории в карьере, своя машина в гараже, подготовка маршрута и задания для настоящих поездок. Начни с этой истории — остальные разделы доступны в меню.</p></details>';
