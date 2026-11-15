@@ -1,3 +1,4 @@
+import {applyDaily,dailyView} from './daily-core.mjs';
 import {applyPet,petView,PetError} from './pet-core.mjs';
 import {parkingChannelAccess} from './parking-membership.mjs';
 import {parkingView,applyParking,ParkingError} from './parking-course.mjs';
@@ -173,7 +174,7 @@ function publicQuestion(state,catalog){
  const q=catalog.questions.find(q=>q.id===d.ids[d.index]);
  const {ok,ex,...view}=q;return view;
 }
-function privateView(s,catalog){const v=structuredClone(s);v.pet=petView(v.pet);if(v.drag){v.drag.total=v.drag.ids.length;delete v.drag.ids;v.drag.question=publicQuestion(s,catalog)}return v;}
+function privateView(s,catalog){const v=structuredClone(s);v.pet=petView(v.pet);v.daily=dailyView(s);if(v.drag){v.drag.total=v.drag.ids.length;delete v.drag.ids;v.drag.question=publicQuestion(s,catalog)}return v;}
 
 // Telegram third-party Ed25519 validation; no bot token required.
 const PROD_KEY='e7bf03a2fa4602af4580703d88dda5bb59f32ed8b02a56c187fe7d34caed242d';
@@ -253,7 +254,7 @@ async function handler(request){
  }else {
   if(!b.event.startsWith('pet.')&&enforced&&!paymentAccess.full&&fullVersionRequired(b.event,b.data||{},row.state_json))return json({error:'Это задание входит в полную версию.',code:'FULL_VERSION_REQUIRED',access},402,origin);
   if(enforced&&b.event==='circuit.create'&&row.state_json.circuit.routes.length>=5)return json({error:'Можно сохранить до пяти маршрутов.'},409,origin);
-  result=b.event.startsWith('pet.')?applyPet(row.state_json,b.event,b.data||{},now.getTime(),CATALOG.questions):b.event.startsWith('parking.')?applyParking(row.state_json,b.event,b.data||{},access.parking,now,award):apply(row.state_json,b.event,b.data||{},now);
+  result=b.event.startsWith('pet.daily.')?applyDaily(row.state_json,b.event,b.data||{},now.getTime()):b.event.startsWith('pet.')?applyPet(row.state_json,b.event,b.data||{},now.getTime(),CATALOG.questions):b.event.startsWith('parking.')?applyParking(row.state_json,b.event,b.data||{},access.parking,now,award):apply(row.state_json,b.event,b.data||{},now);
  }
  const summary={reward:result.reward,feedback:result.feedback,_completed:result.completed===true||completedGameTask(row.state_json,result.state,b.event,b.data||{})};
  const saved=await rpc('drive98_commit',{p_uid:uid,p_request:b.requestId,p_revision:b.revision,p_state:result.state,p_week:week,p_rep:result.state.career.week[week]?.rep||0,p_nickname:nickname,p_listed:listed,p_result:summary});
