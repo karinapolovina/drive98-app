@@ -3,7 +3,7 @@
 const HAIR={brown:['#66391f','#ae6033','#e19059'],black:['#25282d','#41444d','#646672'],blonde:['#9b7747','#d6b578','#f2d79f'],red:['#843d25','#ca6936','#ed9b58']};
 const rgb=hex=>hex.match(/[a-f\d]{2}/gi).map(x=>parseInt(x,16));
 function recolor(r,g,b,a){
- if(a.kind==='cat'&&a.coat!=='ginger'&&r>85&&r-g>36&&g-b>27&&g>r*.45&&g<r*.76&&b<r*.49){
+ if(a.kind==='cat'&&a.coat!=='ginger'&&r>85&&r-g>36&&g-b>27&&g>r*.45&&g<r*.76&&b<g*.61){
   const stripe=r<220;
   return a.coat==='black'?(stripe?[38,43,52]:[77,83,96]):(stripe?[171,170,158]:[244,240,224]);
  }
