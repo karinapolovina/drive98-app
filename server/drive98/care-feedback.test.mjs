@@ -1,0 +1,16 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {applyPet,freshPet} from './pet-core.mjs';
+const context=vm.createContext({});
+vm.runInContext(fs.readFileSync(new URL('../../d98-care-feedback-v1.js',import.meta.url),'utf8'),context);
+const text=context.D98CareFeedback.message;
+const base=()=>({pet:{...freshPet(1000),avatar:{...freshPet(1000).avatar,kind:'human'},needs:{energy:2,mood:2,clarity:2,ready:1}}});
+test('feedback describes actual fractional treat changes',()=>{const r=applyPet(base(),'pet.care',{action:'treat'},20000);assert.equal(r.feedback.changes.energy,.5);assert.equal(r.feedback.changes.mood,.25);assert.match(text(r.feedback),/Энергия \+½/);assert.match(text(r.feedback),/Настроение \+¼/);assert.equal(r.reward,0);});
+test('shared affection cooldown explains no growth and has no fake reward',()=>{let r=applyPet(base(),'pet.care',{action:'pet'},20000);r=applyPet(r.state,'pet.care',{action:'support'},22000);assert.equal(r.feedback.reason,'cooldown');assert.equal(r.feedback.remainingMs,8000);assert.deepEqual(r.feedback.changes,{energy:0,mood:0});assert.match(text(r.feedback),/8 с/);assert.doesNotMatch(text(r.feedback),/\+1/);});
+test('full needs are explained instead of promising an increase',()=>{const s=base();s.pet.needs.energy=4;s.pet.needs.mood=4;const r=applyPet(s,'pet.care',{action:'treat'},20000);assert.equal(r.feedback.reason,'full');assert.match(text(r.feedback),/уже полные/);assert.doesNotMatch(text(r.feedback),/\+/);});
+test('play reports energy use even when mood is full',()=>{const s=base();s.pet.needs.mood=4;const r=applyPet(s,'pet.care',{action:'play'},20000);assert.equal(r.feedback.changes.energy,-.25);assert.match(text(r.feedback),/Настроение уже полное/);assert.match(text(r.feedback),/На игру ушло ¼/);});
+test('treat cooldown survives a fresh client and expired cooldown can grow again',()=>{const r=applyPet(base(),'pet.care',{action:'treat'},20000);const blocked=applyPet(r.state,'pet.care',{action:'treat'},21000);assert.equal(blocked.feedback.reason,'cooldown');assert.match(text(blocked.feedback),/Снова восстановить показатели/);const next=applyPet(blocked.state,'pet.care',{action:'treat'},320000);assert.equal(next.feedback.reason,'changed');assert.equal(next.feedback.changes.energy,.5);});
+test('rest and wake copy explain actual timing and current energy',()=>{let r=applyPet(base(),'pet.care',{action:'sleep'},20000);assert.match(text(r.feedback),/за 5 минут/);r=applyPet(r.state,'pet.care',{action:'wake'},22000);assert.equal(text(r.feedback),'Герой проснулся. Энергия: 2 из 4.');});
+test('missing confirmation never claims a saved result',()=>{assert.match(text(null),/Не удалось подтвердить сохранение/);});

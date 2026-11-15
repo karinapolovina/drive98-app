@@ -17,6 +17,7 @@ body.pet-legacy{background:var(--pet-cream);color:var(--pet-ink)}body.pet-legacy
 .pet-touch{border:0;background:transparent;padding:0;appearance:none}
 .pet-more{margin:20px 0 8px;border-top:1px solid #b9ad88;padding-top:14px;text-align:center}
 .pet-more summary{font:14px/1.6 Arial,sans-serif;color:var(--pet-blue);cursor:pointer;padding:10px;min-height:44px}
+.pet-meter i b{position:relative;overflow:hidden}.pet-meter i b em{position:absolute;inset:0 auto 0 0;display:block;height:100%}.pet-meter.energy i b em{background:var(--pet-green)}.pet-meter.mood i b em{background:var(--pet-coral)}.pet-meter.clarity i b em{background:var(--pet-yellow)}.pet-meter.ready i b em{background:var(--pet-brown)}
 .pet-keys{position:absolute;left:70%;top:75%;width:52px;height:66px;border:0;background:transparent;padding:8px;cursor:grab;touch-action:none;z-index:5;transform-origin:center}
 .pet-keys svg{width:100%;height:100%;image-rendering:pixelated}
 .pet-bubble-field{position:absolute;inset:27% 0 6%;pointer-events:none;z-index:5}
