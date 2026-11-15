@@ -30,3 +30,5 @@ body.pet-legacy{background:var(--pet-cream);color:var(--pet-ink)}body.pet-legacy
 @keyframes pet-pop{to{transform:scale(1.2);opacity:0}}
 @media(prefers-reduced-motion:reduce){.pet-bubble-toy,.pet-bubble-toy.popped{animation:none}.pet-bubble-toy.popped{opacity:0}}
 @media(max-height:780px){.pet-room{height:330px}.pet-bubble,#pet-app p.pet-bubble{font-size:10px}.pet-home-actions .pet-button{padding:13px 2px}.pet-home-actions svg{margin-bottom:9px}}
+
+.pet-preview,.pet-choice{position:relative}#pet-app .pet-asset-status{position:absolute;left:5%;right:5%;top:40%;margin:0;text-align:center;font:14px/1.5 Arial,sans-serif;color:var(--pet-ink);background:var(--pet-cream);padding:8px}

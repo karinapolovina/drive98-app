@@ -31,7 +31,8 @@ function apply(ctx,a,frame,care){
   const color=a.kind==='cat'?recolor(r,g,b,a):hair;
   if(color){v[i]=color[0];v[i+1]=color[1];v[i+2]=color[2];continue;}
   // Skin, shoes, eyes, map and the blanket keep their original palette.
-  if(a.kind==='human'&&frame!==6&&y>cy+15&&y<96&&r>95&&g>75&&b>40&&r-g<60&&g-b<75&&g-b>20&&x>42&&x<117&&!(care&&frame<2&&x>66&&x<99)&&!(care&&[4,5].includes(frame)&&x>78&&x<95&&y>59&&y<79)){
+  if(a.kind==='human'&&frame!==6&&y>cy+15&&y<96&&r>95&&g>75&&b>40&&r-g<48&&g-b<75&&g-b>20&&x>42&&x<117&&!(care&&frame<2&&x>66&&x<99)&&!(care&&[4,5].includes(frame)&&x>78&&x<95&&y>59&&y<79)){
+   if(((x-110)/10)**2+((y-(care&&[2,3].includes(frame)?52:72))/10)**2<1||(!care&&frame===1&&x>64&&y>58)||(!care&&[4,7,10].includes(frame)&&x>65&&x<103&&y>70)||x>cx-10&&x<cx+11&&y<cy+22)continue;
    const shade=g<195;
    const color=a.outfit==='teal'?(shade?[45,78,78]:[70,113,113]):a.outfit==='leather'?(shade?[43,43,43]:[68,68,72]):null;
    if(color){v[i]=color[0];v[i+1]=color[1];v[i+2]=color[2];}
