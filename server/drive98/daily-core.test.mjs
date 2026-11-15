@@ -22,3 +22,6 @@ test('skipped days do not grant catch-up rewards or reduce knowledge',()=>{let s
 test('onboarding is required and arbitrary events are rejected',()=>{const s=base();s.pet.onboarded=false;assert.throws(()=>ensure(s));assert.throws(()=>step(ensure(base()),'unknown',payload(ensure(base()))));});
 
 test('practice correction updates repetition without another daily reward',()=>{let s=complete(ensure(base()),{wrong:true});const before=s.pet.needs.clarity;s=step(s,'practice',{repeatOnly:true});assert.equal(s.daily.practice.task.id,'984499');s=complete(s,{key:'practice',now:N+1000});assert.equal(s.pet.needs.clarity,before);assert.equal(dailyView(s,N).progress.needsRepeat,0);assert.equal(s.daily.reviews['984499'].due,'2026-11-18');});
+
+test('completion after midnight retains the old result until today is assigned',()=>{let s=ensure(base());s=complete(s,{now:N+86400000});const v=dailyView(s,N+86400000);assert.equal(v.active.day,'2026-11-15');assert.equal(v.active.status,'complete');assert.equal(v.lastCompleted.day,'2026-11-15');s=ensure(s,N+86400000);const next=dailyView(s,N+86400000);assert.equal(next.active.day,'2026-11-16');assert.equal(next.lastCompleted.day,'2026-11-15');});
+test('inherited keys cannot be treated as assignments',()=>{assert.throws(()=>step(ensure(base()),'start',{key:'__proto__',taskId:'984499',version:1}));});

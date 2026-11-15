@@ -16,9 +16,11 @@ function choose(d,focus,day,tasks){
 function record(task,day,now){return {day,status:'assigned',task:structuredClone(task),assignedAt:now,selected:null,completedAt:null,rewardGranted:false};}
 function publicRecord(r){if(!r)return null;const {correct,explanation,takeaway,...task}=r.task;const out={...r,task};if(r.selected!==null){out.correct=correct;out.explanation=explanation;out.task.takeaway=takeaway;out.right=r.selected===correct;}return out;}
 export function dailyView(state,now=Date.now()){
- const d=state.daily||initial(),day=moscowDay(now),active=unfinished(d)||d.days[day]||null;
+ const d=state.daily||initial(),day=moscowDay(now);
  const completed=Object.values(d.days).filter(r=>r.status==='complete');
- return {serverNow:now,serverDay:day,active:publicRecord(active),practice:publicRecord(d.practice),progress:{completed:completed.length,unique:new Set(completed.map(r=>r.task.id)).size,firstCorrect:completed.filter(r=>r.selected===r.task.correct).length,needsRepeat:Object.values(d.reviews).filter(r=>r.wrong).length},history:completed.sort((a,b)=>b.day.localeCompare(a.day)).map(r=>({day:r.day,title:r.task.title,right:r.selected===r.task.correct})).slice(0,30)};
+ const lastCompleted=[...completed].sort((a,b)=>b.completedAt-a.completedAt)[0]||null;
+ const active=unfinished(d)||d.days[day]||lastCompleted;
+ return {serverNow:now,serverDay:day,active:publicRecord(active),lastCompleted:publicRecord(lastCompleted),practice:publicRecord(d.practice),progress:{completed:completed.length,unique:new Set(completed.map(r=>r.task.id)).size,firstCorrect:completed.filter(r=>r.selected===r.task.correct).length,needsRepeat:Object.values(d.reviews).filter(r=>r.wrong).length},history:completed.sort((a,b)=>b.day.localeCompare(a.day)).map(r=>({day:r.day,title:r.task.title,right:r.selected===r.task.correct})).slice(0,30)};
 }
 export function applyDaily(source,event,data={},now=Date.now(),tasks=DAILY_TASKS){
  const s=structuredClone(source);s.pet=petView(s.pet,now);s.daily??=initial();const d=s.daily,day=moscowDay(now);let feedback=null;
@@ -30,7 +32,7 @@ export function applyDaily(source,event,data={},now=Date.now(),tasks=DAILY_TASKS
    const repeats=tasks.filter(t=>d.reviews[t.id]?.wrong);const task=choose(d,s.pet.focus,day,data.repeatOnly&&repeats.length?repeats:tasks);d.practice={...record(task,day,now),id:crypto.randomUUID()};
   }
  }else{
-  const practice=data.key==='practice',r=practice?d.practice:d.days[data.key];
+  const practice=data.key==='practice',r=practice?d.practice:Object.hasOwn(d.days,data.key)?d.days[data.key]:null;
   if(!r||r.task.id!==data.taskId||r.task.version!==data.version||(practice&&r.id!==data.attemptId))throw new PetError('Задание изменилось. Открой его ещё раз');
   if(event==='pet.daily.start'){if(r.status==='assigned'){r.status='started';r.startedAt=now;}}
   else if(event==='pet.daily.answer'){

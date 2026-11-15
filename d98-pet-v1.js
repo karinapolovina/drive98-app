@@ -29,14 +29,14 @@ function back(){if(screen==='focus'&&focusOrigin==='study'){focusOrigin=null;ret
 let dailyKey=null,dailyPending=false,dailyError='',dailyTriedDay=null,dailyClockOffset=0,dailyClockValue=null;
 const dailyState=()=>cloud.state.daily;
 function dailyDay(){const d=dailyState();if(d?.serverNow!==dailyClockValue){dailyClockValue=d?.serverNow;dailyClockOffset=d?.serverNow?d.serverNow-Date.now():0;}return new Date(Date.now()+dailyClockOffset+10800000).toISOString().slice(0,10);}
-const dailyRecord=()=>dailyKey==='practice'?dailyState()?.practice:dailyState()?.active;
+const dailyRecord=()=>{const d=dailyState();return dailyKey==='practice'?d?.practice:d?.active?.day===dailyKey?d.active:d?.lastCompleted?.day===dailyKey?d.lastCompleted:d?.active;};
 const dailyPayload=r=>({key:dailyKey||r.day,taskId:r.task.id,version:r.task.version,...(dailyKey==='practice'?{attemptId:r.id}:{})});
 async function dailyCall(event,data={}){
  if(dailyPending||busy)return null;dailyPending=true;dailyError='';render();
  try{const result=await cloudAction(event,data,()=>{});if(!result)dailyError='Не удалось сохранить. Повторить';return result;}
  finally{dailyPending=false;if(!legacy)render();}
 }
-function dailyAuto(){if(!model().onboarded||dailyPending||busy)return;const d=dailyState(),day=dailyDay();if((!d?.active||d.serverDay!==day)&&dailyTriedDay!==day){dailyTriedDay=day;dailyCall('pet.daily.ensure');}}
+function dailyAuto(){if(!model().onboarded||dailyPending||busy)return;const d=dailyState(),day=dailyDay();if((!d?.active||d.serverDay!==day||d.active.status==='complete'&&d.active.day!==day)&&dailyTriedDay!==day){dailyTriedDay=day;dailyCall('pet.daily.ensure');}}
 function dailyHome(){const r=dailyState()?.active,done=r?.status==='complete',label=!r?'Загрузить задание':done?'Посмотреть разбор':r.status==='answered'?'Продолжить разбор':r.status==='started'?'Продолжить задание':'Начать задание';return `<section class="pet-daily-card"><div class="pet-daily-meta"><b>Задание на сегодня</b><span>Около 3 минут</span></div><h2>${E(r?.task.title||'Один понятный шаг')}</h2><p>${done?'Сегодня стало на один понятный шаг больше!':'Посмотри на картинку, выбери ответ — затем разберём вместе.'}</p>${r&&r.day!==dailyState().serverDay?'<p class="pet-note">Закончим задание за '+E(r.day)+'. Затем появится сегодняшнее.</p>':''}${btn(dailyPending?'Загружаем…':label,'daily-open')}<div class="pet-daily-meta"><span>${done?'✓ Выполнено':'За разбор · ясность +1'}</span><span>Можно ошибаться</span></div>${dailyError?'<p role="alert" class="pet-note">'+E(dailyError)+'</p>':''}<p class="pet-daily-time">Новый день — в 00:00 по Москве</p></section>`;}
 function dailyMarkup(){const r=dailyRecord();if(!r)return `<h1>Задание на сегодня</h1><p>Загрузим твою ситуацию.</p>${btn('Повторить загрузку','daily-open')}`;const t=r.task,answered=r.selected!==null,done=r.status==='complete',practice=dailyKey==='practice';
  if(screen==='daily-result')return `<h1>${practice?'Ситуация разобрана!':'Задание выполнено!'}</h1><div class="pet-daily-result-hero">${sprite('proud')}</div><section class="pet-daily-explanation"><b>Что запомнить</b><p>${E(t.takeaway||r.explanation)}</p></section><h2>${practice?'Разбор сохранён':r.clarityGain>0?'Ясность +'+String(r.clarityGain).replace('.',','):'Ясность уже на максимуме'}</h2><p class="pet-note">${practice?'Дневная награда начисляется один раз.':'Результат сохранён в «Моём прогрессе».'}</p>${btn('К герою','daily-home')}${btn('Ещё ситуацию','daily-practice','','text')}`;
@@ -45,7 +45,7 @@ function dailyMarkup(){const r=dailyRecord();if(!r)return `<h1>Задание н
 let dailyRetry=null;
 async function dailyAction(a,v){
  if(a==='daily-open'){
-  dailyKey=null;if(!dailyState()?.active||dailyState().serverDay!==dailyDay()){if(!await dailyCall('pet.daily.ensure'))return;}
+  dailyKey=null;if(!dailyState()?.active||dailyState().serverDay!==dailyDay()||dailyState().active.status==='complete'&&dailyState().active.day!==dailyState().serverDay){if(!await dailyCall('pet.daily.ensure'))return;}
   const r=dailyState()?.active;if(!r)return;dailyKey=r.day;
   if(r.status==='assigned'&&!await dailyCall('pet.daily.start',dailyPayload(r)))return;
   return goPet('daily');
