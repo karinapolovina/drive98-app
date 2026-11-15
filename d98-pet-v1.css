@@ -12,3 +12,20 @@ body.pet-active{background:var(--pet-cream);color:var(--pet-ink);font-family:Ari
 .pet-question-image[hidden]{display:none!important}.pet-figure{margin:16px 0}.pdd-image-status{font:13px/1.5 Arial,sans-serif;color:#726b4a}.pet-actor{left:7%;width:86%}
 body.pet-legacy{background:var(--pet-cream);color:var(--pet-ink)}body.pet-legacy .app{background:var(--pet-cream)!important;color:var(--pet-ink)!important}body.pet-legacy .screen-head h1,body.pet-legacy .screen-head p,body.pet-legacy .app h2,body.pet-legacy .app p,body.pet-legacy .screen-code{color:var(--pet-ink)!important}body.pet-legacy .primary{background:var(--pet-blue)!important;color:var(--pet-cream)!important}body.pet-legacy .secondary{background:transparent!important;border-color:var(--pet-blue)!important;color:var(--pet-blue)!important}body.pet-legacy .sheet{background:var(--pet-cream);color:var(--pet-ink)}body.pet-legacy .sheet h1,body.pet-legacy .sheet p,body.pet-legacy .sheet label{color:var(--pet-ink)!important}body.pet-legacy .sheet input:not([type=checkbox]),body.pet-legacy .sheet textarea,body.pet-legacy .sheet select{background:var(--pet-cream);color:var(--pet-ink)}
 #pet-app .pet-button{text-transform:none!important;letter-spacing:0!important;font-style:normal!important}.petting-room .pet-actor{animation:none}.pet-stroking .pet-actor{animation:pet-nuzzle 1s steps(3) infinite}
+
+/* The source sprites are drawn at 4x logical resolution, without a tiny intermediate bitmap. */
+.pet-touch{border:0;background:transparent;padding:0;appearance:none}
+.pet-more{margin:20px 0 8px;border-top:1px solid #b9ad88;padding-top:14px;text-align:center}
+.pet-more summary{font:14px/1.6 Arial,sans-serif;color:var(--pet-blue);cursor:pointer;padding:10px;min-height:44px}
+.pet-keys{position:absolute;left:70%;top:75%;width:52px;height:66px;border:0;background:transparent;padding:8px;cursor:grab;touch-action:none;z-index:5;transform-origin:center}
+.pet-keys svg{width:100%;height:100%;image-rendering:pixelated}
+.pet-bubble-field{position:absolute;inset:27% 0 6%;pointer-events:none;z-index:5}
+.pet-bubble-toy{position:absolute;pointer-events:auto;width:52px;height:52px;padding:0;border:3px solid #354b78;background:#d5e9df;clip-path:polygon(20% 0,80% 0,80% 8%,92% 8%,92% 20%,100% 20%,100% 80%,92% 80%,92% 92%,80% 92%,80% 100%,20% 100%,20% 92%,8% 92%,8% 80%,0 80%,0 20%,8% 20%,8% 8%,20% 8%);cursor:pointer;animation:pet-bob 2.8s steps(6) infinite alternate}
+.pet-bubble-toy:before{content:'';position:absolute;left:9px;top:8px;width:12px;height:5px;background:#fff3da}
+.pet-bubble-toy[data-size='1']{width:66px;height:66px;animation-delay:-1s}
+.pet-bubble-toy[data-size='2']{width:44px;height:44px;animation-delay:-2s}
+.pet-bubble-toy.popped{animation:pet-pop .3s steps(3) forwards;pointer-events:none}
+@keyframes pet-bob{to{transform:translateY(-14px)}}
+@keyframes pet-pop{to{transform:scale(1.2);opacity:0}}
+@media(prefers-reduced-motion:reduce){.pet-bubble-toy,.pet-bubble-toy.popped{animation:none}.pet-bubble-toy.popped{opacity:0}}
+@media(max-height:780px){.pet-room{height:330px}.pet-bubble,#pet-app p.pet-bubble{font-size:10px}.pet-home-actions .pet-button{padding:13px 2px}.pet-home-actions svg{margin-bottom:9px}}

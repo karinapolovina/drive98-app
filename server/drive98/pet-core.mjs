@@ -3,7 +3,7 @@ const clamp=n=>Math.max(0,Math.min(4,Number(n)||0));
 export function freshPet(now=Date.now()){return {version:1,onboarded:false,avatar:{kind:'cat',sex:'f',coat:'ginger',hair:'brown',style:'bob',accessory:'none',outfit:'jacket'},name:'',focus:null,note:'',needs:{energy:4,mood:3,clarity:2,ready:1},at:now,sleepAt:null,lastCare:{},mistakes:[],solved:[],sessions:[],muted:false,playCount:0,toys:['ball']};}
 export function petView(value,now=Date.now()){
  const p={...freshPet(now),...structuredClone(value||{})};p.needs={...freshPet(now).needs,...p.needs};
- if(p.sleepAt){const gain=Math.floor(Math.max(0,now-p.sleepAt)/300000);p.needs.energy=clamp(p.needs.energy+gain);if(p.needs.energy===4)p.sleepAt=null;else if(gain)p.sleepAt+=gain*300000;}
+ if(p.sleepAt){const gain=Math.floor(Math.max(0,now-p.sleepAt)/300000);p.needs.energy=clamp(p.needs.energy+gain);if(gain&&p.needs.energy===4)p.sleepAt=null;else if(gain)p.sleepAt+=gain*300000;}
  return p;
 }
 export class PetError extends Error {constructor(message){super(message);this.status=400;}}
@@ -18,10 +18,22 @@ export function applyPet(source,event,data={},now=Date.now(),questions=[]){
   p.focus=data.focus===null?null:pick(data.focus,FOCUSES,null);p.note=String(data.note||'').trim().slice(0,400);p.onboarded=true;
  }else if(event==='pet.settings'){p.muted=data.muted===true;}
  else if(event==='pet.care'){
-  const action=data.action;if(!['pet','play','sleep','wake'].includes(action))reject('Неизвестное действие');
+  const action=data.action;if(!['pet','support','treat','play','sleep','wake'].includes(action))reject('Неизвестное действие');
+  if(['support','treat'].includes(action)&&!['human','shark'].includes(p.avatar.kind))reject('Выбери доступную заботу для этого героя');
   if(action==='sleep'){if(!p.sleepAt)p.sleepAt=now;}
   else if(action==='wake')p.sleepAt=null;
-  else {if(p.sleepAt)reject('Герой отдыхает. Сначала разбуди его');const delay=action==='play'?30000:10000;if(now-(p.lastCare[action]||0)>=delay){p.needs.mood=clamp(p.needs.mood+1);p.lastCare[action]=now;if(action==='play'){p.needs.energy=clamp(p.needs.energy-.25);p.playCount=(p.playCount||0)+1;if(p.playCount>=3&&!p.toys?.includes('duck'))p.toys=[...(p.toys||['ball']),'duck'];}}}
+  else {
+   if(p.sleepAt)reject('Герой отдыхает. Сначала разбуди его');
+   const group=['pet','support'].includes(action)?'affection':action;
+   const delay=action==='play'?30000:action==='treat'?300000:10000;
+   const last=group==='affection'?Math.max(p.lastCare.affection||0,p.lastCare.pet||0,p.lastCare.support||0):p.lastCare[group]||0;
+   if(!last||now-last>=delay){
+    p.lastCare[group]=now;p.lastCare[action]=now;
+    p.needs.mood=clamp(p.needs.mood+(action==='treat'?.25:1));
+    if(action==='treat')p.needs.energy=clamp(p.needs.energy+.5);
+    if(action==='play'){p.needs.energy=clamp(p.needs.energy-.25);p.playCount=(p.playCount||0)+1;if(p.playCount>=3&&!p.toys?.includes('duck'))p.toys=[...(p.toys||['ball']),'duck'];}
+   }
+  }
  }else if(event==='pet.exam'){
   const answers=data.answers;if(!Array.isArray(answers)||!answers.length||answers.length>20)reject('Некорректная попытка');
   const map=new Map(questions.map(q=>[q.id,q]));const seen=new Set();let correct=0;
