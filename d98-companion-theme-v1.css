@@ -1,0 +1,125 @@
+/* DRIVE98 companion: shared chrome for the retained routes, practice and archive.
+   Diagram/SVG/map internals retain their semantic colours and positioning. */
+body:is(.pet-active,.pet-legacy){--acid:#354b78;--cyan:#354b78;--panel:#eee3c9;--ink:#302b19;--muted:#726b4a;background:#fff3da!important;color:#302b19!important;color-scheme:light}
+body.pet-legacy.pet-legacy.pet-legacy .app{width:100%;max-width:480px!important;min-height:100dvh;margin:0 auto!important;padding:16px 18px 30px!important;background:#fff3da!important;background-image:none!important;border:0!important;box-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app>header{position:static!important;display:flex!important;align-items:center;justify-content:space-between;gap:12px;width:100%!important;max-width:none!important;margin:0 0 22px!important;padding:0!important;height:44px;background:none!important;border:0!important;box-shadow:none!important;transform:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app>header .logo{display:block!important;font:18px/1.4 PetPixel,monospace!important;letter-spacing:-1px!important;color:#302b19!important;background:none!important;width:auto!important;height:auto!important;text-indent:0!important;transform:none!important;filter:none!important;text-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app>header .logo small{display:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app>header .menu-back{display:block!important;position:static!important;width:42px;min-height:44px;padding:0!important;border:0!important;background:none!important;color:#302b19!important;font:30px/1 monospace!important;clip-path:none!important;transform:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app>header .pill{position:static!important;display:grid;place-items:center;width:42px;height:44px;min-width:42px;padding:0!important;background:none!important;border:0!important;clip-path:none!important;color:#302b19!important;font:24px/1 Arial,sans-serif!important;cursor:pointer}
+body.pet-legacy.pet-legacy.pet-legacy #pet-return,body.pet-legacy.pet-legacy.pet-legacy>#nav,body.pet-legacy.pet-legacy.pet-legacy .scanlines,body.pet-legacy.pet-legacy.pet-legacy .screen-code,body.pet-legacy.pet-legacy.pet-legacy .hud-caption{display:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(h1,h2,h3,h4,p,span,b,strong,small,em,label,li,summary,a,button,input,textarea,select),body:is(.pet-active,.pet-legacy) .sheet :is(h1,h2,h3,h4,p,span,b,strong,small,em,label,li,summary,a,button,input,textarea,select){color:#302b19!important;font-family:Arial,sans-serif!important;font-style:normal!important;text-transform:none!important;letter-spacing:0!important;text-shadow:none!important;-webkit-text-fill-color:currentColor!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(h1,h2,h3),body:is(.pet-active,.pet-legacy) .sheet :is(h1,h2,h3){font-family:PetPixel,monospace!important;font-weight:400!important;background:none!important;background-clip:border-box!important;overflow-wrap:anywhere}
+body.pet-legacy.pet-legacy.pet-legacy .app h1,body:is(.pet-active,.pet-legacy) .sheet h1{font-size:18px!important;line-height:1.7!important;margin:8px 0 20px!important}
+body.pet-legacy.pet-legacy.pet-legacy .app h2,body:is(.pet-active,.pet-legacy) .sheet h2{font-size:13px!important;line-height:1.9!important;margin:14px 0!important}
+body.pet-legacy.pet-legacy.pet-legacy .app h3,body:is(.pet-active,.pet-legacy) .sheet h3{font-size:12px!important;line-height:1.9!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(p,li),body:is(.pet-active,.pet-legacy) .sheet :is(p,li){font-size:15px!important;line-height:1.65!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(small,.notice,.garage-economy,.ring-economy,.rank-note){font-size:12px!important;line-height:1.65!important;color:#726b4a!important}
+body.pet-legacy.pet-legacy.pet-legacy .screen-head{margin:0 0 20px!important;padding:0!important;border:0!important;text-align:left}
+body.pet-legacy.pet-legacy.pet-legacy .screen-head br{display:block}
+/* Flat warm panels: only UI containers, never the road drawing or map tiles. */
+body.pet-legacy.pet-legacy.pet-legacy :is(.card,.brief-panel,.mission-preview,.route-guide,.route-guide-note,.route-guide-example,.ring-map-card,.ring-award,.chapter-award,.mission-select,.chapter-option,.part,.selected-part,.practice-active,.practice-result,.practice-start,.practice-reflection,.road-card,.road-explanation,.road-practice,.road-intro,.road-debrief,.crew-banner,.crew-invite,.leader,.leader.player,.stats>div,.node,.ad,.race-feedback,.drag-result,.trip-picker>button,.story-consequence,.detail-callout,.district-finish,.potential-card,.planner-point-row,.import-panel,.import-confirm,.planner-limits,.service-row,.reminder-card,.notification-example,.notification-message,.regulation-pdf,.garage-service-route,.garage-pdf-context,.parking-promo,.parking-status,.parking-focus,.maneuver-feedback,.outcome-result,.outcome-explain){background:#eee3c9!important;background-image:none!important;border:1px solid #b9ad88!important;border-radius:0!important;box-shadow:none!important;filter:none!important;color:#302b19!important;clip-path:none!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.route-guide,.brief-panel,.card,.road-card,.practice-active,.practice-result,.ring-map-card,.story-consequence,.outcome-result,.outcome-explain){padding:16px!important;margin:16px 0!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.route-guide-note,.route-guide-example,.detail-callout){background:#fff3da!important;padding:12px!important;border-left:3px solid #354b78!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.route-guide-step,.route-guide-steps li){color:#302b19!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.route-guide-step-number,.route-guide-steps li:before){background:#d6dfb8!important;color:#302b19!important;border-color:#8c956b!important;border-radius:0!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.route-guide-detail,.route-guide details){border-color:#b9ad88!important}
+body.pet-legacy.pet-legacy.pet-legacy .route-guide summary{color:#354b78!important;font-size:14px!important;line-height:1.6!important;min-height:44px}
+/* The same ink-blue actions as the hero, no racing gradients or skew. */
+body.pet-legacy.pet-legacy.pet-legacy .app button,body:is(.pet-active,.pet-legacy) .sheet button{font-style:normal!important;transform:none;min-height:44px;border-radius:0!important;box-shadow:none!important;text-shadow:none!important;letter-spacing:0!important;text-transform:none!important;cursor:pointer}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(.primary,.ad button),body:is(.pet-active,.pet-legacy) .sheet .primary{display:block;width:100%;min-height:52px;padding:15px 12px!important;margin:12px 0!important;background:#354b78!important;background-image:none!important;color:#fff3da!important;border:0!important;font:12px/1.8 PetPixel,monospace!important;clip-path:polygon(5px 0,calc(100% - 5px) 0,calc(100% - 5px) 5px,100% 5px,100% calc(100% - 5px),calc(100% - 5px) calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,5px calc(100% - 5px),0 calc(100% - 5px),0 5px,5px 5px)!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .primary *,body:is(.pet-active,.pet-legacy) .sheet .primary *{color:inherit!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(.secondary,.game-tabs button,.garage-mode-tabs button,.ring-route-list button,.planner-tools button,.planner-search button,#planner-alternatives>button,#planner-search-results>button,.import-open,.regulation-answers button,.reminder-vehicle button,.reminder-delivery button),body:is(.pet-active,.pet-legacy) .sheet :is(.secondary,.planner-tools button,.planner-search button,#planner-alternatives>button,#planner-search-results>button,.import-open){background:#fff3da!important;color:#354b78!important;border:1px solid #b9ad88!important;clip-path:none!important;padding:11px 12px!important;font:14px/1.5 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.game-tabs,.garage-mode-tabs,.road-tabs){gap:7px!important;margin:18px 0!important;border:0!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(button.on,button.selected,.selected-part,.picked,.chosen),body:is(.pet-active,.pet-legacy) .sheet button.selected{background:#354b78!important;color:#fff3da!important;border-color:#354b78!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(button.on,button.selected,.selected-part,.picked,.chosen) *{color:inherit!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.race-answers,.story-actions,.road-choices)>button{background:#fff3da!important;border:2px solid #b9ad88!important;padding:13px!important;font:15px/1.6 Arial,sans-serif!important;clip-path:none!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(button.correct,.race-feedback.right,.road-correct){background:#dde6c7!important;border-color:#527440!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(button.incorrect,.race-feedback.wrong,.needs-review,.maneuver-feedback.is-blocked){background:#f2d6c4!important;border-color:#a05142!important}
+body.pet-legacy.pet-legacy.pet-legacy .app button:disabled{opacity:.55!important;cursor:default!important}
+body:is(.pet-active,.pet-legacy) :is(button,input,select,textarea,a):focus-visible{outline:3px solid #c17c35!important;outline-offset:3px!important}
+/* Shared forms and dialogs, including profile and Yandex transfer. */
+body:is(.pet-active,.pet-legacy) .modal{background:#302b1966!important;backdrop-filter:none!important;padding:12px!important;align-items:center}
+body:is(.pet-active,.pet-legacy) .sheet{width:100%;max-width:480px!important;max-height:calc(100dvh - 24px)!important;padding:22px 18px!important;overflow:auto;background:#fff3da!important;background-image:none!important;color:#302b19!important;border:2px solid #302b19!important;border-radius:0!important;box-shadow:none!important;clip-path:none!important}
+body:is(.pet-active,.pet-legacy) .sheet .screen-code{display:none!important}
+body:is(.pet-active,.pet-legacy) .sheet .close{position:sticky!important;top:0;float:right;margin:-10px -6px 0 8px!important;min-width:40px;height:40px;background:#fff3da!important;color:#302b19!important;border:0!important;font:28px/1 Arial,sans-serif!important;z-index:1001;clip-path:none!important}
+body:is(.pet-active,.pet-legacy) :is(.sheet,.ring-form,.practice-reflection) :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea),body.pet-legacy.pet-legacy.pet-legacy :is(.planner-search input,.planner-point-row input){background:#fff3da!important;color:#302b19!important;border:1px solid #b9ad88!important;border-radius:0!important;font:16px/1.5 Arial,sans-serif!important;min-height:46px;padding:11px!important;color-scheme:light}
+body:is(.pet-active,.pet-legacy) :is(input[type=checkbox],input[type=radio],input[type=range]){accent-color:#354b78!important}
+body:is(.pet-active,.pet-legacy) :is(.sheet,.app) a{color:#354b78!important;text-underline-offset:3px}
+body:is(.pet-active,.pet-legacy) .toast,body:is(.pet-active,.pet-legacy)[data-saving="1"]:after{background:#354b78!important;color:#fff3da!important;border:2px solid #fff3da;border-radius:0!important;font:14px/1.6 Arial,sans-serif!important;box-shadow:none!important}
+/* Keep cartography full-sized. Its geometry, markers and official road colours stay intact. */
+body.pet-legacy.pet-legacy.pet-legacy .planner-sheet{max-width:900px!important}
+body.pet-legacy.pet-legacy.pet-legacy .planner-map-wrap{border:2px solid #302b19!important}
+body.pet-legacy.pet-legacy.pet-legacy #planner-map{background:#d6dfb8!important;border-radius:0!important;min-height:310px}
+body.pet-legacy.pet-legacy.pet-legacy :is(.planner-intro,.planner-limits,.import-panel,.potential-card){font:14px/1.65 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.import-panel,.import-confirm,.planner-point-row,.potential-card){padding:12px!important}
+body.pet-legacy.pet-legacy.pet-legacy .planner-search{gap:7px}
+body.pet-legacy.pet-legacy.pet-legacy .planner-tools{display:flex;flex-wrap:wrap;gap:6px}
+body.pet-legacy.pet-legacy.pet-legacy .planner-tools button{flex:1 1 95px}
+/* Retained garage/service screens: quiet mint stage and compact typography. */
+body.pet-legacy.pet-legacy.pet-legacy :is(.tuning-stage,.parking-chapter-hero,.circuit-art,.crew-emblem,.drag-track,.drag-result,.stage-hud){background:#d6dfb8!important;background-image:none!important;color:#302b19!important;border:1px solid #8c956b!important;border-radius:0!important;box-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.stage-hud,.garage-wallet,.service-reminders h1,.notification-message,.player-rep){-webkit-text-fill-color:#302b19!important;background-clip:border-box!important;text-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(.mission-num,.mission-rep,.crew-rep strong,.garage-wallet strong,.brief-grid strong,.mission-meter>b){font-size:24px!important;font-family:PetPixel,monospace!important;line-height:1.5!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.mission-meter>div,.crew-bar,.chapter-option i){background:#d6dfb8!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.mission-meter i,.crew-bar i,.progress div){background:#91ac59!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .notice{position:static!important;border-top:1px solid #d1c5a5!important;margin-top:28px!important;padding:16px 0!important;text-align:center;color:#726b4a!important}
+@media(max-width:359px){body.pet-legacy.pet-legacy.pet-legacy .app{padding:12px!important}body.pet-legacy.pet-legacy.pet-legacy .app h1,body:is(.pet-active,.pet-legacy) .sheet h1{font-size:16px!important}body.pet-legacy.pet-legacy.pet-legacy .app h2{font-size:12px!important}}
+
+body.pet-legacy.pet-legacy.pet-legacy .route-guide li::before{color:#302b19!important;border-color:#8c956b!important;background:#d6dfb8!important;border-radius:0!important}
+/* Compact labels keep exercise titles readable at 320–390px. */
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-select{display:grid!important;grid-template-columns:28px minmax(0,1fr) 46px!important;align-items:center!important;gap:9px!important;padding:14px 10px!important;text-align:left;min-height:96px}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-text{min-width:0!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-text b{display:block;font-size:16px!important;line-height:1.5!important;overflow-wrap:normal!important;word-break:normal!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-text :is(small,em){display:block;font-size:11px!important;line-height:1.6!important;margin:4px 0}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-num{font-size:18px!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-rep{font:600 14px/1.5 Arial,sans-serif!important;text-align:center!important;white-space:normal}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-rep small{font:10px/1.4 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .chapter-option{padding:13px 11px!important;text-align:left}
+body.pet-legacy.pet-legacy.pet-legacy .app .chapter-option b{font-size:16px!important;line-height:1.5!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .chapter-option span{font-size:13px!important;line-height:1.55!important}
+body.pet-legacy.pet-legacy.pet-legacy .planner-tools button small,body.pet-legacy.pet-legacy.pet-legacy .planner-point-row small{font-size:12px!important;line-height:1.4!important}
+body.pet-legacy.pet-legacy.pet-legacy .planner-tools button b{font-size:16px!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .game-tabs button.primary{background:#354b78!important;color:#fff3da!important;clip-path:none!important;font:14px/1.5 Arial,sans-serif!important;min-height:48px}
+body.pet-legacy.pet-legacy.pet-legacy .road-stories:before{display:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .app :is(h1,h2,h3){filter:none!important;transform:none!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.game-level-progress,.road-stat,.scene-footer,.road-original,.road-progress,.road-question,.road-explanation,.parking-diagram-dialog){background:#eee3c9!important;background-image:none!important;color:#302b19!important;box-shadow:none!important;border-radius:0!important;border-color:#b9ad88!important}
+body.pet-legacy.pet-legacy.pet-legacy .game-level-progress{padding:16px!important;border:1px solid #b9ad88!important;margin:18px 0!important}
+body.pet-legacy.pet-legacy.pet-legacy .road-card:before,body.pet-legacy.pet-legacy.pet-legacy .race-answers button:before{position:static!important;display:block;color:#726b4a!important;font:12px/1.5 PetPixel,monospace!important;margin-bottom:9px}
+body.pet-legacy.pet-legacy.pet-legacy .race-answers button:before{margin:0 7px 0 0}
+body.pet-legacy.pet-legacy.pet-legacy .road-card.road-locked{opacity:.75!important}
+body.pet-legacy.pet-legacy.pet-legacy .road-stories .primary{width:100%!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.trip-back,.reminder-back){background:#fff3da!important;color:#354b78!important;border:1px solid #b9ad88!important;padding:10px 12px!important;font:14px/1.5 Arial,sans-serif!important;clip-path:none!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.story-scene,.parking-diagram){border:1px solid #8c956b!important;background:#d6dfb8!important;border-radius:0!important;box-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.scene-footer,.road-original){padding:8px!important;font:12px/1.6 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy .road-question{font:600 18px/1.6 Arial,sans-serif!important;background:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .road-progress i{background:#91ac59!important}
+body.pet-legacy.pet-legacy.pet-legacy .road-stories .d98-outcome{--panel:#eee3c9;--signal:#354b78}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome figure{height:auto!important;margin:12px 0!important;background:#d6dfb8!important;border:1px solid #8c956b!important;border-radius:0!important;z-index:auto!important;box-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome figure img{height:auto!important;max-height:280px!important;object-fit:contain!important;filter:none!important;background:transparent!important}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome figure:before,body.pet-legacy.pet-legacy.pet-legacy .d98-outcome figure:after{display:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome figure figcaption{position:static!important;background:#eee3c9!important;color:#302b19!important;font:12px/1.6 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome :is(.outcome-meta,.outcome-deck){color:#726b4a!important;font:12px/1.6 Arial,sans-serif!important;letter-spacing:0!important;text-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .first-trip-guide{background:#d6dfb8!important;color:#302b19!important;border:1px solid #8c956b!important;border-radius:0!important;padding:13px!important;font:14px/1.65 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy .app h2.road-question{font:600 18px/1.6 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.garage-progression,.garage-goal){background:#eee3c9!important;color:#302b19!important;border:1px solid #b9ad88!important;padding:14px!important;border-radius:0!important}
+body.pet-legacy.pet-legacy.pet-legacy .tuning-stage{height:auto!important;min-height:0!important;aspect-ratio:auto!important;padding:0!important;overflow:hidden;filter:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .tuning-stage>:is(.base-car,.paint-layer,.underlight,.wheel){display:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .tuning-stage:before,body.pet-legacy.pet-legacy.pet-legacy .tuning-stage:after{display:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .companion-car{display:block;width:100%;height:auto;image-rendering:pixelated;shape-rendering:crispEdges;filter:none!important;transform:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .stage-hud{position:static!important;display:block!important;text-align:center!important;padding:8px!important;font:11px/1.5 PetPixel,monospace!important}
+body.pet-legacy.pet-legacy.pet-legacy .parts-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important}
+body.pet-legacy.pet-legacy.pet-legacy .part{padding:12px!important;min-height:105px!important;overflow-wrap:anywhere}
+body.pet-legacy.pet-legacy.pet-legacy .part-sample i{transform:none!important;box-shadow:none!important;border:2px solid #302b19!important}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome figure.companion-result{display:flex;align-items:center;justify-content:center;min-height:190px;background:#d6dfb8!important}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome figure.companion-result>:is(img,figcaption){display:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .companion-result-hero{display:block;width:250px;max-width:100%;height:auto;image-rendering:pixelated;filter:none!important}
+body.pet-legacy.pet-legacy.pet-legacy .d98-outcome .outcome-result{grid-template-columns:1fr!important;gap:7px!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-select .mission-num{font:18px/1.5 PetPixel,monospace!important;min-width:0!important;overflow:hidden}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-select .mission-rep{font:600 14px/1.5 Arial,sans-serif!important;min-width:0!important}
+body.pet-legacy.pet-legacy.pet-legacy .app .mission-select .mission-rep small{font:10px/1.4 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy #content .game-tabs button.primary{background:#354b78!important;color:#fff3da!important;clip-path:none!important;font:14px/1.5 Arial,sans-serif!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.maneuver-cockpit,.maneuver-hint,.maneuver-source,.parking-scene){background:#eee3c9!important;color:#302b19!important;border:1px solid #b9ad88!important;border-radius:0!important;box-shadow:none!important}
+body.pet-legacy.pet-legacy.pet-legacy :is(.maneuver-hint,.maneuver-source) summary{color:#354b78!important;font:14px/1.6 Arial,sans-serif!important;min-height:44px}
+body.pet-legacy.pet-legacy.pet-legacy :is(.maneuver-legend,.maneuver-control-label){color:#302b19!important}
+body.pet-legacy.pet-legacy.pet-legacy .parking-diagram-dialog{color:#302b19!important;border:2px solid #302b19!important;border-radius:0!important}
+body.pet-legacy.pet-legacy.pet-legacy .parking-diagram-dialog button{min-height:44px;background:#354b78!important;color:#fff3da!important;border:0;padding:12px;font:14px/1.5 Arial,sans-serif!important}
