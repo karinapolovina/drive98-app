@@ -1,0 +1,14 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {raceApi} from './race-api.mjs';
+const O='https://game.test',questions=Array.from({length:20},(_,i)=>({id:'1-'+(i+1),a:['a','b'],ok:0}));
+function fixture(){let row=null;let firstConflict=true;const rpc=async(_,p)=>{
+ if(p.p_action==='list')return {friends:[],code:'a'.repeat(20),active:true,room:row};
+ if(p.p_action==='create'){if(p.p_guest!=='b'.repeat(20))return {error:'Not invited',status:403};row={id:'11111111-1111-4111-8111-111111111111',host_id:'tg:1',guest_id:'tg:2',state_json:p.p_state,revision:0,expires_at:'2099-01-01'};return {room:structuredClone(row)};}
+ if(!row||![row.host_id,row.guest_id].includes(p.p_uid))return {error:'Not found',status:404};
+ if(p.p_action==='load')return {room:structuredClone(row)};
+ if(firstConflict){firstConflict=false;return {conflict:true};}if(p.p_revision!==row.revision)return {conflict:true};row.state_json=p.p_state;row.revision++;return {room:structuredClone(row)};
+ };return {rpc,questions,allowedOrigin:O};}
+async function request(env,body,uid='tg:1',origin=O){const r=await raceApi(new Request(O+'/api/race',{method:'POST',headers:{Origin:origin,'Content-Type':'application/json'},body:JSON.stringify(body)}),uid,'/api/race',origin,env);return {status:r.status,body:await r.json()};}
+test('race endpoints require expected origin and structured input',async()=>{const env=fixture();assert.equal((await request(env,{action:'create',friendCode:'b'.repeat(20)},'tg:1','https://other.test')).status,403);assert.equal((await request(env,[])).status,400);assert.equal((await request(env,{action:'create',friendCode:'bad'})).status,400);});
+test('relationship rejection is enforced by the trusted RPC, with no client override',async()=>{assert.equal((await request(fixture(),{action:'create',friendCode:'c'.repeat(20),host_id:'tg:1'})).status,403);});
+test('readiness retries a compare-and-swap conflict without changing shared start',async()=>{const env=fixture(),created=await request(env,{action:'create',friendCode:'b'.repeat(20)});assert.equal(created.status,200);const roomId=created.body.room.id;assert.equal(created.body.room.friend.joined,false);await request(env,{action:'join',roomId},'tg:2');await request(env,{action:'ready',roomId,ready:true});const ready=await request(env,{action:'ready',roomId,ready:true},'tg:2');assert.equal(ready.status,200);assert.ok(ready.body.room.startAt>Date.now());const replay=await request(env,{action:'ready',roomId,ready:true},'tg:2');assert.equal(replay.body.room.startAt,ready.body.room.startAt);assert.equal(replay.body.room.questionId,null);});
+test('nonparticipant cannot join or answer even if room id is known',async()=>{const env=fixture(),r=await request(env,{action:'create',friendCode:'b'.repeat(20)});assert.equal((await request(env,{action:'join',roomId:r.body.room.id},'tg:3')).status,404);});

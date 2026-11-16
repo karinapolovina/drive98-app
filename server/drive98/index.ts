@@ -1,3 +1,4 @@
+import {raceApi} from './race-api.mjs';
 import {applyDaily,dailyView} from './daily-core.mjs';
 import {applyPet,petView,PetError} from './pet-core.mjs';
 import {parkingChannelAccess} from './parking-membership.mjs';
@@ -231,6 +232,7 @@ async function handler(request){
  const auth=request.headers.get('Authorization')||'';
  const uid=auth.startsWith('tma ')?await verifyTelegram(auth.slice(4),BOT_ID):null;
  if(!uid)return json({error:'Открой игру заново через Telegram, чтобы войти в свой профиль.'},401,origin);
+ if(path==='/api/race'||path.startsWith('/api/race/'))return raceApi(request,uid,path,origin,{rpc,questions:CATALOG.questions,allowedOrigin:ORIGIN});
  const now=new Date(),week=calendar(now).week;
  const row=await rpc('drive98_load',{p_uid:uid,p_initial:fresh(),p_week:week});
  const paymentAccess=await rpc('drive98_payment_access',{p_uid:uid});
